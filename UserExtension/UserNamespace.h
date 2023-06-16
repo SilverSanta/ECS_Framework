@@ -1,0 +1,115 @@
+#pragma once
+
+
+namespace user
+{
+	// ENUMS
+	enum class SpriteLayer
+	{
+		BACKGROUND_FAR,
+		BACKGROUND_CLOSE,
+		TILE_GROUND_FAR,
+		TILE_GROUND_CLOSE,
+		UNIT,
+		PROJECTILE,
+		VISUAL_EFFECTS,
+		MOUSE,
+
+
+		_COUNT,
+	};
+	enum class ComponentType {
+
+		ACTION,
+		AI,
+		ANIMATEDSPRITE1,
+		ANIMATEDSPRITE2,
+		ANIMATEDSPRITE3,
+		ANIMATEDSPRITE4,
+		ANIMATEDSPRITE5,
+		ATTACK,
+		AUDIO,
+		CELLGRID,
+		COLLISION1,
+		COLLISION2,
+		COLLISION3,
+		COLLISION4,
+		COLLISION5,
+		EQUIPMENT,
+		HEALTH,
+		MOVEMENT,
+		PLAYER,
+		RESOURCES,
+		STATE,
+		STATS,
+		TEST,
+		TRANSFORM,
+
+
+		_NONE,
+	};
+	enum class State {
+		// The order is used to check for interruptibility
+		IDLE = 1,
+		MOVING = 2,
+		TAKING_ACTION = 3,
+		STATUS_EFFECT = 4,
+		DYING = 5,
+		DEAD = 6
+	};
+	enum class SubState
+	{
+		// IDLE (10-19)
+		IDLE_STANDING = 10,
+		IDLE_LYING = 11,
+		IDLE_SNORING = 12,
+		IDLE_DEFENDING = 13,
+
+		// MOVING (20-29)
+		MOVING_WALKING = 20,
+		MOVING_RUNNING = 21,
+		MOVING_SWIMMING = 22,
+		MOVING_FLYING = 23,
+
+		// TAKING_ACTION (30-39)
+		ACTION_ATTACKING = 30,
+		ACTION_GETTING_HIT = 31,
+		ACTION_USING_POTION = 32,
+
+		// STATUS EFFECT (40-49)
+		STATUS_PARALYZED = 40,
+		STATUS_STUNNED = 41,
+		STATUS_KNOWDOWN = 42,
+
+		// DYING (50-59)
+		DYING_NORMAL = 50,
+
+		// DEAD (60-69)
+		DEAD_NORMAL = 60
+	};
+	enum class Direction
+	{
+		Facing_RIGHT,
+		Facing_LEFT,
+		Facing_DOWN,
+		Facing_UP
+	};
+	enum class CollisionProfile
+	{
+		BLOCK,
+		BLOCK_ENEMYUNIT,
+		BLOCK_STATICOBJECT,
+		OVERLAP,
+		OVERLAP_TRAP,
+		OVERLAP_DETECTIONZONE,
+		OVERLAP_MOUSE,
+		OVERLAP_INTERACTION,
+		// USER-DEFINED
+		// USER-DEFINED
+		// USER-DEFINED
+		// USER-DEFINED
+		// USER-DEFINED
+	};	
+}
+
+

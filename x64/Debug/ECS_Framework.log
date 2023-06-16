@@ -1,0 +1,17 @@
+﻿  ComponentsManager.cpp
+  EntitiesManager.cpp
+  ResourceManager.cpp
+  SystemsManager.cpp
+  ECS_Framework.cpp
+  Entity.cpp
+  ActionSystem.cpp
+  AnimationSystem.cpp
+  CollisionSystem.cpp
+  MovementSystem.cpp
+  RenderSystem.cpp
+  StateSystem.cpp
+  Main.cpp
+  TestSystem.cpp
+  UserExtension.cpp
+  Generating Code...
+  ECS_Framework.vcxproj -> D:\ECS_Framework\x64\Debug\ECS_Framework.exe

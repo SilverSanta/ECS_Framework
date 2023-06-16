@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Legacy">
+      <UniqueIdentifier>{fc5a9989-b1cc-405e-8b52-2955e8a05e3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserExtension">
+      <UniqueIdentifier>{4a029c23-c5a0-4b3b-82ef-b74407809ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Legacy\Header Files\Components">
+      <UniqueIdentifier>{77b4234a-17c0-4848-83dd-fb55347fb93a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Header Files\Systems">
+      <UniqueIdentifier>{b704d5b8-de15-4df9-9722-5af7824b2bb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Header Files\Managers">
+      <UniqueIdentifier>{cdf035fd-0d05-49db-961c-823a47b73b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Header Files\Misc">
+      <UniqueIdentifier>{fda197f1-a707-41af-8583-61c1a92152f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Legacy\Source Files\Systems">
+      <UniqueIdentifier>{6cd17602-f984-409e-b7c2-df69faa8bf71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Source Files\Managers">
+      <UniqueIdentifier>{31d76d95-a8c8-49b5-a0d6-7353d5c664d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Legacy\Source Files\Misc">
+      <UniqueIdentifier>{94269709-6994-4b42-b3dc-e8f6a6c0adba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserExtension\Header Files">
+      <UniqueIdentifier>{757c9850-983f-4c19-af3e-7a69ce2b4af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserExtension\Source Files">
+      <UniqueIdentifier>{62f6621f-d7c9-4e9d-8ba3-cfacd949671d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserExtension\Header Files\Components">
+      <UniqueIdentifier>{a0317621-09de-42e1-a357-8729c126b8e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserExtension\Header Files\Systems">
+      <UniqueIdentifier>{f1b7b5f5-1caa-4a85-b743-6d577c2bd6e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserExtension\Source Files\Systems">
+      <UniqueIdentifier>{8eb237eb-c25b-475d-9723-dc74ac118fa2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="UserExtension\Source\UserExtension.cpp">
+      <Filter>UserExtension\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Managers\ComponentsManager.cpp">
+      <Filter>Legacy\Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Managers\EntitiesManager.cpp">
+      <Filter>Legacy\Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Managers\ResourceManager.cpp">
+      <Filter>Legacy\Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Managers\SystemsManager.cpp">
+      <Filter>Legacy\Source Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Misc\ECS_Framework.cpp">
+      <Filter>Legacy\Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Misc\Entity.cpp">
+      <Filter>Legacy\Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Systems\ActionSystem.cpp">
+      <Filter>Legacy\Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Systems\AnimationSystem.cpp">
+      <Filter>Legacy\Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Systems\CollisionSystem.cpp">
+      <Filter>Legacy\Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Systems\MovementSystem.cpp">
+      <Filter>Legacy\Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Systems\RenderSystem.cpp">
+      <Filter>Legacy\Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Legacy\Source\Systems\StateSystem.cpp">
+      <Filter>Legacy\Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="UserExtension\Source\Systems\TestSystem.cpp">
+      <Filter>UserExtension\Source Files\Systems</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="header\Systems\TestSystem.h">
+      <Filter>UserExtension\Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Components\ActionComponent.h">
+      <Filter>Legacy\Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Components\AnimatedSpriteComponent.h">
+      <Filter>Legacy\Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Components\CellGridComponent.h">
+      <Filter>Legacy\Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Components\CollisionComponent.h">
+      <Filter>Legacy\Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Components\IComponent.h">
+      <Filter>Legacy\Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Components\MovementComponent.h">
+      <Filter>Legacy\Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Components\StateComponent.h">
+      <Filter>Legacy\Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Components\TransformComponent.h">
+      <Filter>Legacy\Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="UserExtension\Header\Components\TestComponent.h">
+      <Filter>UserExtension\Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Managers\ComponentsManager.h">
+      <Filter>Legacy\Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Managers\EntitiesManager.h">
+      <Filter>Legacy\Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Managers\ResourceManager.h">
+      <Filter>Legacy\Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Managers\SystemsManager.h">
+      <Filter>Legacy\Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Misc\Entity.h">
+      <Filter>Legacy\Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Misc\ECS_Framework.h">
+      <Filter>Legacy\Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Systems\ActionSystem.h">
+      <Filter>Legacy\Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Systems\AnimationSystem.h">
+      <Filter>Legacy\Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Systems\CollisionSystem.h">
+      <Filter>Legacy\Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Systems\MovementSystem.h">
+      <Filter>Legacy\Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Systems\RenderSystem.h">
+      <Filter>Legacy\Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\Header\Systems\StateSystem.h">
+      <Filter>Legacy\Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Legacy\mfk.h">
+      <Filter>Legacy</Filter>
+    </ClInclude>
+    <ClInclude Include="UserExtension\Header\UserExtension.h">
+      <Filter>UserExtension\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserExtension\UserNamespace.h">
+      <Filter>UserExtension</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
