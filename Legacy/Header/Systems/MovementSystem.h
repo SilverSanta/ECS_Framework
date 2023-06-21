@@ -21,7 +21,7 @@ public:
 
 
 public:
-	void _MoveAll(uint32_t deltaTime);
+	void _MoveAll(uint64_t deltaTime);
 	float Get_AngleBetweenPoints(float x1, float y1, float x2, float y2);
 	void Set_Angle(TransformComponent* TransformPtr, AnimatedSpriteComponent* SpritePtr, float angle);
 	void Set_Angle(TransformComponent* TransformPtr, AnimatedSpriteComponent* SpritePtr, mfk::NormalVector2D vectorangle);
@@ -29,7 +29,7 @@ public:
 
 private:
 	user::Direction Get_DirectionFromMovementVector(uint64_t movementcomponentid);
-	void ApplyMovement(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, uint32_t deltaTime);
+	void ApplyMovement(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, uint64_t deltaTime);
 	void Update_MovementParameters(MovementComponent* MovementPtr, user::SubState substate);
 	
 	

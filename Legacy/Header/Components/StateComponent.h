@@ -22,7 +22,7 @@ public:
 
 	// OVERRIDES
 public:
-	virtual void _Update(uint32_t currentTime) override
+	virtual void _Update(uint64_t currentTime) override
 	{
 		if (this != nullptr)
 		{
@@ -73,8 +73,8 @@ public:
 	user::SubState m_SubStateFromPreviousFrame;
 	user::Direction m_CurrentDirection;
 	user::Direction m_DirectionFromPreviousFrame;
-	uint32_t m_Time_Current;
-	uint32_t m_Time_StartOfCurrentState;
+	uint64_t m_Time_Current;
+	uint64_t m_Time_StartOfCurrentState;
 
 	float m_Time_Dying = 0.5f;
 	float m_Time_Dead = 0.5f;

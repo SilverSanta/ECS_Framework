@@ -96,11 +96,11 @@
     <ClCompile Include="UserExtension\Source\Systems\TestSystem.cpp">
       <Filter>UserExtension\Source Files\Systems</Filter>
     </ClCompile>
+    <ClCompile Include="UserExtension\Source\Systems\CameraSystem.cpp">
+      <Filter>UserExtension\Source Files\Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header\Systems\TestSystem.h">
-      <Filter>UserExtension\Header Files\Systems</Filter>
-    </ClInclude>
     <ClInclude Include="Legacy\Header\Components\ActionComponent.h">
       <Filter>Legacy\Header Files\Components</Filter>
     </ClInclude>
@@ -172,6 +172,15 @@
     </ClInclude>
     <ClInclude Include="UserExtension\UserNamespace.h">
       <Filter>UserExtension</Filter>
+    </ClInclude>
+    <ClInclude Include="UserExtension\Header\Systems\TestSystem.h">
+      <Filter>UserExtension\Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="UserExtension\Header\Systems\CameraSystem.h">
+      <Filter>UserExtension\Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="UserExtension\Header\Components\CameraComponent.h">
+      <Filter>UserExtension\Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

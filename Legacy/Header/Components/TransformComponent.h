@@ -22,7 +22,7 @@ public:
 
 	// OVERRIDES
 public:
-	virtual void _Update(uint32_t currentTime) override
+	virtual void _Update(uint64_t currentTime) override
 	{
 		if (this != nullptr)
 		{
@@ -44,7 +44,7 @@ public:
 
 	// FUNCTIONS
 public:
-	virtual void _Init(float x, float y, std::vector<TransformComponent> &repo)
+	virtual void _Init(float x, float y, bool usescameratransform, bool usescamerazoom, std::vector<TransformComponent> &repo)
 	{
 		if (this != nullptr)
 		{
@@ -60,6 +60,10 @@ public:
 
 			TransformAngle.x = 0;
 			TransformAngle.y = 0;
+
+			// (3) CAMERA
+			bSusceptibleToCameraMovement = usescameratransform;
+			bSusceptibleToCameraZoom = usescamerazoom;
 		}
 	}
 
@@ -73,6 +77,9 @@ public:
 	float Y;
 	float PreviousFrame_X;
 	float PreviousFrame_Y;
+
+	bool bSusceptibleToCameraMovement;
+	bool bSusceptibleToCameraZoom;
 	
 	mfk::NormalVector2D TransformAngle;
 	

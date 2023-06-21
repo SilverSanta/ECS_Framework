@@ -24,6 +24,7 @@
     <ProjectGuid>{23b03022-e27d-42db-9c17-9fffb723ccdf}</ProjectGuid>
     <RootNamespace>ECSFramework</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ECS_Framework</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -148,11 +149,11 @@
     <ClCompile Include="Legacy\Source\Systems\RenderSystem.cpp" />
     <ClCompile Include="Legacy\Source\Systems\StateSystem.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="UserExtension\Source\Systems\CameraSystem.cpp" />
     <ClCompile Include="UserExtension\Source\Systems\TestSystem.cpp" />
     <ClCompile Include="UserExtension\Source\UserExtension.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="header\Systems\TestSystem.h" />
     <ClInclude Include="Legacy\Header\Components\ActionComponent.h" />
     <ClInclude Include="Legacy\Header\Components\AnimatedSpriteComponent.h" />
     <ClInclude Include="Legacy\Header\Components\CellGridComponent.h" />
@@ -174,7 +175,10 @@
     <ClInclude Include="Legacy\Header\Systems\RenderSystem.h" />
     <ClInclude Include="Legacy\Header\Systems\StateSystem.h" />
     <ClInclude Include="Legacy\mfk.h" />
+    <ClInclude Include="UserExtension\Header\Components\CameraComponent.h" />
     <ClInclude Include="UserExtension\Header\Components\TestComponent.h" />
+    <ClInclude Include="UserExtension\Header\Systems\CameraSystem.h" />
+    <ClInclude Include="UserExtension\Header\Systems\TestSystem.h" />
     <ClInclude Include="UserExtension\Header\UserExtension.h" />
     <ClInclude Include="UserExtension\UserNamespace.h" />
   </ItemGroup>

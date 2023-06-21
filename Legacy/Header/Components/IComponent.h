@@ -16,7 +16,7 @@ public:
 
 	// VIRTUALS
 public:
-	virtual void _Update(uint32_t currentTime) = 0;
+	virtual void _Update(uint64_t currentTime) = 0;
 	virtual void _Render(SDL_Renderer* renderer) = 0;
 	virtual void _DeleteFromRepository() = 0;
 	

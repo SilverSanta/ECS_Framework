@@ -31,15 +31,17 @@ uint64_t EntitiesManager::_CreateEntity()
 		return NULL;
 	}
 }
-std::unordered_map<user::ComponentType, uint64_t> EntitiesManager::_DeleteEntity(Entity* entity)
+std::unordered_map<user::ComponentType, uint64_t> EntitiesManager::_DeleteEntity(uint64_t entityid)
 {
 	// (1) Create a vector of pointers to all components from the entity
-	std::unordered_map<user::ComponentType, uint64_t> ComponentsToBeDeletedByID = entity->RemoveComponentIDsFromEntity();
+	Entity* entity = Get_EntityById(entityid);
 
+	std::unordered_map<user::ComponentType, uint64_t> ComponentsToBeDeletedByID = entity->RemoveComponentIDsFromEntity();
+	
 	// (2) Remove the entity from the vector (kill it)
 	bool bFound = false;
 	int i = 0;
-	while (bFound == false)
+	while (bFound == false && i < m_Entities.size())
 	{
 		if ((int)entity->Get_EntityId() == (int)m_Entities.at(i).Get_EntityId())
 		{
@@ -73,7 +75,6 @@ Entity* EntitiesManager::Get_EntityById(uint64_t entityid)
 	if (entity != nullptr)
 	{
 		return entity;
-		std::cout << entity->Get_EntityId() << std::endl;
 	}
 	else
 	{

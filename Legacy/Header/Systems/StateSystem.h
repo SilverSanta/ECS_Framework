@@ -17,11 +17,7 @@ public:
 
 
 public:
-	static int _GenerateTotalState(user::State state, user::SubState substate, user::Direction direction)
-	{
-		int total = 10000 * (int)state + 100 * (int)substate + 1 * (int)direction;
-		return total;
-	}
+	static int _GenerateTotalState(user::State state, user::SubState substate, user::Direction direction);
 	void _UpdateState_AllPreviousToCurrent();
 	void _CheckForDead_All();
 
@@ -42,4 +38,5 @@ private:
 
 	friend class ActionSystem;
 	friend class MovementSystem;
+	friend class CameraSystem;
 };

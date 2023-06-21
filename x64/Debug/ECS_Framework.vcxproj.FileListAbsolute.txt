@@ -1,2 +1,1 @@
-C:\Users\aruil\OneDrive\Desktop\Framework\ECS_Framework\x64\Debug\ECS_Framework.exe
-D:\ECS_Framework\x64\Debug\ECS_Framework.exe
+D:\ECS_Framework\ECS_Framework\x64\Debug\ECS_Framework.exe

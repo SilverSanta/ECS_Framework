@@ -27,7 +27,7 @@ void ActionSystem::Action_StopMoving(MovementComponent* MovementPtr, StateCompon
 {
 	if (MovementPtr != nullptr && StatePtr != nullptr)
 	{
-		System_State->ChangeCurrentState(StatePtr, user::State::IDLE, user::SubState::IDLE_STANDING, StatePtr->m_CurrentDirection);
+		System_State->ChangeCurrentState(StatePtr, user::State::IDLE, user::SubState::IDLE_DEFAULT, StatePtr->m_CurrentDirection);
 	}
 }
 void ActionSystem::Action_WalkTo(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, float targetx, float targety)
@@ -79,7 +79,7 @@ void ActionSystem::Action_DropDead(uint64_t DyingAgentID)
 
 	if (DyingAgent->Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
 	{
-		// Change state of the dying agend to DROPPINGDEAD
+		// Change state of the dying agend to DROPPINGDEAD		
 		StateComponent* DyingAgent_State = Manager_Components->Get_ComponentPtrFromId(DyingAgent->Get_ComponentIdFromEntityByType(user::ComponentType::STATE), Manager_Components->Components_State);
 		System_State->ChangeCurrentState(DyingAgent_State, user::State::DYING, user::SubState::DYING_NORMAL, DyingAgent_State->m_CurrentDirection);
 	}

@@ -49,7 +49,7 @@ public:
 	}
 
 	template<class T>
-	void UpdateComponents(std::vector<T> &components, uint32_t currenttime)
+	void UpdateComponents(std::vector<T> &components, uint64_t currenttime)
 	{
 		for (auto& component : components)
 		{
@@ -63,8 +63,8 @@ public:
 	{
 		typename std::vector<T>::iterator itr = std::find_if(components.begin(), components.end(), [&](T& val) { IComponent* icomp = &val; return icomp->m_Id == id; });
 		components.erase(itr);
-	}
-	
+	}			
+
 	template<class T>
 	T* Get_ComponentPtrFromId(uint64_t componentid, std::vector<T>& components)
 	{
@@ -72,9 +72,9 @@ public:
 		T* TPtr = &(*itr);
 		return TPtr;
 	}
-		
+
 	virtual void _DeleteComponents(std::unordered_map<user::ComponentType, uint64_t> IDsOfComponentsToBeDeleted);
-	virtual void UpdateRepositories(uint32_t currenttime);	
+	virtual void UpdateRepositories(uint64_t currenttime);	
 	void _SortSpritesByLayer();
 
 

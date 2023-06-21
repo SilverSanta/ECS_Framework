@@ -12,6 +12,11 @@ StateSystem::StateSystem(ComponentsManager* componentsmanager, EntitiesManager* 
 }
 StateSystem::~StateSystem() {}
 
+int StateSystem::_GenerateTotalState(user::State state, user::SubState substate, user::Direction direction)
+{
+	int total = 100000 * (int)state + 100 * (int)substate + 1 * (int)direction;
+	return total;
+}
 void StateSystem::_UpdateState_AllPreviousToCurrent()
 {
 	for (auto& State : Manager_Components->Components_State)
@@ -21,21 +26,21 @@ void StateSystem::_UpdateState_AllPreviousToCurrent()
 }
 void StateSystem::_CheckForDead_All()
 {
-	std::vector<uint64_t> ToBeDeleted;
+	std::vector<uint64_t> EntitiesToBeDeleted;
 
 	for (auto& State : Manager_Components->Components_State)
 	{
 		if (State.m_CurrentState == user::State::DEAD)
 		{
 			if (State.m_Time_Current - State.m_Time_StartOfCurrentState >= State.m_Time_Dead * 1000)
-			{
-				ToBeDeleted.push_back(State.Get_OwnerId());
+			{				
+				EntitiesToBeDeleted.push_back(State.Get_OwnerId());
 			}
 		}
 	}
-	for (auto& id : ToBeDeleted)
-	{
-		Manager_Components->_DeleteComponents(Manager_Entities->_DeleteEntity(Manager_Entities->Get_EntityById(id)));
+	for (auto& id : EntitiesToBeDeleted)
+	{		
+		Manager_Components->_DeleteComponents(Manager_Entities->_DeleteEntity(id));
 	}
 }
 void StateSystem::ChangeCurrentState(StateComponent* stateptr, user::State newstate, user::SubState newsubstate, user::Direction newdirection)
@@ -58,7 +63,7 @@ void StateSystem::ReturnToIdle(StateComponent* stateptr)
 	stateptr->m_CurrentState = user::State::IDLE;
 
 	Set_State(stateptr, user::State::IDLE);
-	Set_SubState(stateptr, user::SubState::IDLE_STANDING);
+	Set_SubState(stateptr, user::SubState::IDLE_DEFAULT);
 	Set_Direction(stateptr, stateptr->m_CurrentDirection);
 
 	stateptr->m_Time_StartOfCurrentState = stateptr->m_Time_Current;
@@ -73,7 +78,7 @@ void StateSystem::Set_State(StateComponent* StatePtr, user::State state)
 }
 void StateSystem::Set_SubState(StateComponent* StatePtr, user::SubState substate)
 {
-	if ((int)substate * 1000 >= (int)StatePtr->m_CurrentState * 10000 && (int)substate * 1000 < ((int)StatePtr->m_CurrentState + 1) * 10000)
+	if ((int)substate * 1000 >= (int)StatePtr->m_CurrentState * 100000 && (int)substate * 1000 < ((int)StatePtr->m_CurrentState + 1) * 100000)
 	{
 		StatePtr->m_CurrentSubState = substate;
 	}

@@ -15,19 +15,24 @@ MyFramework::MyFramework(const char* title, std::pair<uint16_t, uint16_t> window
 	SDL_Init(SDL_INIT_VIDEO);
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
 
-		std::cout << "SDL could not bi initialized: " << SDL_GetError() << "\n\n";
+		std::cout << "SDL could not be initialized: " << SDL_GetError() << "\n\n";
 	}
 	else {
 
 		std::cout << "SDL video system is ready to go\n\n";
 	}
-
+		
 	WindowWidth = windowsize.first;
 	WindowHeight = windowsize.second;
 	FrameRate = framerate;	
 
+	CameraTransform_SavedInGame = std::make_pair(0.f, 0.f);
+	CameraTransform_Menu = std::make_pair(10000.f, 0.f);
+	CameraTransform_InGameForAnchoring = std::make_pair(0.f, 0.f);
+	MousePos = std::make_pair(0, 0);
+	bInMenu = true;
+
 	m_window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WindowWidth, WindowHeight, SDL_WINDOW_SHOWN);
-	//screen = SDL_GetWindowSurface(window);
 	m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
 }
 
@@ -48,50 +53,68 @@ std::pair<uint16_t, uint16_t> MyFramework::Get_WindowDimensions(){
 
 	return std::make_pair(WindowWidth,WindowHeight);
 }
-bool MyFramework::Get_IsRunning(){
+
+uint64_t MyFramework::Get_CurrentTickInGame(){
+
+	return Tick_CurrentInGame;
+}
+uint64_t MyFramework::Get_CurrentTickInMenu() {
+
+	return Tick_CurrentInMenu;
+}
+uint64_t MyFramework::Get_DeltaTicksInGame(){
+
+	return DeltaTicks_InGame;
+}
+
+bool MyFramework::ProgramIsRunning() {
+
+	return bProgramIsRunning;
+}
+bool MyFramework::InMenu()
+{
+	return bInMenu;
+}
+bool MyFramework::GameIsRunning() {
 
 	return bGameIsRunning;
 }
-uint32_t MyFramework::Get_CurrentTime(){
 
-	return CurrentTime;
-	std::cout << CurrentTime << std::endl;
-}
-uint32_t MyFramework::Get_DeltaTicks(){
+void MyFramework::RunGameLoop()
+{
+	while (ProgramIsRunning() == true)
+	{
+		if (InMenu() == true || GameIsRunning() == false)
+		{
+			HandleLoopStart_InMenu();			
 
-	return DeltaTicks;
-}
-
-void MyFramework::RunGameLoop(){
-
-	while (IsRunning()) {
-		
-		HandleLoopStart();
-		if (MoveToNextFrame()) {
-			//User input
-			m_EventCallback();
-
-			//Game logic
-			m_LogicCallback();
-
-			//Rendering
-			SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-			SDL_RenderClear(m_renderer);
-			SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-			m_RenderCallback();
-			SDL_RenderPresent(m_renderer);
+			if (bSufficientTimePassedBetweenFrames == true)
+			{
+				MenuEventCallback();
+				MenuLogicCallback();
+				MenuRenderCallback();
+			}
 		}
-		HandleLoopEnd();
+		else if(GameIsRunning() == true)
+		{
+			HandleLoopStart_InGame();
+
+			if (bSufficientTimePassedBetweenFrames == true)
+			{
+				EventCallback();
+				LogicCallback();
+				RenderCallback();
+			}			
+		}	
 	}
 }
-bool MyFramework::IsRunning(){
-
-	return bGameIsRunning;
+void MyFramework::StartGame()
+{
+	bGameIsRunning = true;
 }
-
-bool MyFramework::MoveToNextFrame(){
-
-	return bNextFrame;
+void MyFramework::EndGame()
+{
+	bGameIsRunning = false;
 }
 
 void MyFramework::Set_Resolution(int w, int h){
@@ -103,30 +126,100 @@ void MyFramework::Set_FrameRate(int framerate){
 
 	FrameRate = framerate;
 }
-void MyFramework::Set_Tick(uint32_t &tick){
 
-	tick = SDL_GetTicks();
+void MyFramework::Set_ProgramIsRunning(bool programisrunning){
+
+	bProgramIsRunning = programisrunning;
 }
-void MyFramework::Set_IsRunning(bool isrunning){
-
-	bGameIsRunning = isrunning;
+void MyFramework::Set_InMenu(bool inmenu)
+{
+	bInMenu = inmenu;
 }
 
-void MyFramework::HandleLoopStart(){
-	
-	CurrentTime = SDL_GetTicks();
-	Tick_Second = SDL_GetTicks();
-
-	DeltaTicks = Tick_Second - Tick_First;
-
-	bNextFrame = (DeltaTicks > 1000.f / FrameRate) ? (true) : (false);
-}
-void MyFramework::HandleLoopEnd(){
-	
-	if (bNextFrame == true) {
-
-		Tick_First = Tick_Second;
+void MyFramework::HandleLoopStart_InGame()
+{	
+	Tick_GetCurrentTick();
+	bSufficientTimePassedBetweenFrames = (Tick_Current - (Tick_CurrentInGame + Tick_CurrentInMenu) >= 1000.f / FrameRate) ? (true) : (false);
+	if (bSufficientTimePassedBetweenFrames == true)
+	{
+		Tick_PreviousInGame = Tick_CurrentInGame;
+		Tick_CurrentInGame = Tick_Current - Tick_CurrentInMenu;
+		DeltaTicks_InGame = Tick_CurrentInGame - Tick_PreviousInGame;
 	}
+}
+void MyFramework::HandleLoopStart_InMenu()
+{
+	Tick_GetCurrentTick();
+	bSufficientTimePassedBetweenFrames = (Tick_Current - (Tick_CurrentInGame + Tick_CurrentInMenu) >= 1000.f / FrameRate) ? (true) : (false);
+	if (bSufficientTimePassedBetweenFrames == true)
+	{
+		Tick_PreviousInMenu = Tick_CurrentInMenu;
+		Tick_CurrentInMenu = Tick_Current - Tick_CurrentInGame;
+		DeltaTicks_InMenu = Tick_CurrentInMenu - Tick_PreviousInMenu;
+	}
+}
+
+void MyFramework::Set_EventCallback(std::function<void(void)> func) {
+
+	m_EventCallback = func;
+}
+void MyFramework::Set_RenderCallback(std::function<void(void)> func) {
+
+	m_RenderCallback = func;
+}
+void MyFramework::Set_LogicCallback(std::function<void(void)> func){
+
+	m_LogicCallback = func;
+}
+void MyFramework::EventCallback() {
+
+		m_EventCallback();
+	}
+void MyFramework::LogicCallback() {
+
+		m_LogicCallback();
+	}
+void MyFramework::RenderCallback()
+{	
+	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+	SDL_RenderClear(m_renderer);
+	SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+	m_RenderCallback();
+	SDL_RenderPresent(m_renderer);
+}
+
+void MyFramework::Set_MenuEventCallback(std::function<void(void)> func)
+{
+	m_MenuEventCallback = func;
+}
+void MyFramework::Set_MenuRenderCallback(std::function<void(void)> func)
+{
+	m_MenuRenderCallback = func;
+}
+void MyFramework::Set_MenuLogicCallback(std::function<void(void)> func)
+{
+	m_MenuLogicCallback = func;
+}
+void MyFramework::MenuEventCallback()
+{
+	m_MenuEventCallback();
+}
+void MyFramework::MenuLogicCallback()
+{
+	m_MenuLogicCallback();
+}
+void MyFramework::MenuRenderCallback()
+{
+	SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+	SDL_RenderClear(m_renderer);
+	SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+	m_MenuRenderCallback();
+	SDL_RenderPresent(m_renderer);
+}
+
+void MyFramework::Tick_GetCurrentTick()
+{
+	Tick_Current = SDL_GetTicks64();
 }
 
 void MyFramework::Set_Pixel(SDL_Surface* surface, int x, int y, uint8_t b, uint8_t g, uint8_t r) {
@@ -143,31 +236,6 @@ void MyFramework::Set_Pixel(SDL_Surface* surface, int x, int y, uint8_t b, uint8
 
 	SDL_UnlockSurface(surface);
 }
-void MyFramework::Set_EventCallback(std::function<void(void)> func) {
 
-	m_EventCallback = func;
-}
-void MyFramework::Set_RenderCallback(std::function<void(void)> func) {
 
-	m_RenderCallback = func;
-}
-void MyFramework::Set_LogicCallback(std::function<void(void)> func){
 
-	m_LogicCallback = func;
-}
-
-void MyFramework::EventCallback() {
-
-		m_EventCallback();
-	}
-void MyFramework::LogicCallback() {
-
-		m_LogicCallback();
-	}
-void MyFramework::RenderCallback() {
-
-		m_RenderCallback();
-	}
-void MyFramework::MenuLoop() {
-
-}

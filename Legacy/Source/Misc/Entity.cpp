@@ -81,12 +81,11 @@ std::unordered_map<user::ComponentType, uint64_t> Entity::RemoveComponentIDsFrom
 		if (Component.second != NULL)
 		{
 			ComponentsToBeDeletedByID.insert(std::make_pair(Component.first, Component.second));
-
-			std::cout << "Slot: " << (int)Component.first << " released from component #" << Component.second << "\n";
+			//std::cout << "Slot: " << (int)Component.first << " released from component #" << Component.second << "\n";
 		}
 		else
 		{
-			std::cout << "Slot: " << (int)Component.first << " is empty\n";
+			//std::cout << "Slot: " << (int)Component.first << " is empty\n";
 		}
 	}
 	return ComponentsToBeDeletedByID;

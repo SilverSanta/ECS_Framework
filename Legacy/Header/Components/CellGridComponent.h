@@ -23,7 +23,7 @@ public:
 
 	// OVERRIDES
 public:
-	virtual void _Update(uint32_t currentTime) override
+	virtual void _Update(uint64_t currentTime) override
 	{
 		if (this != nullptr)
 		{

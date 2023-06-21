@@ -65,7 +65,7 @@ void LegacyComponentsManager::_DeleteComponents(std::unordered_map<user::Compone
 		}
 	}
 }
-void LegacyComponentsManager::UpdateRepositories(uint32_t currenttime)
+void LegacyComponentsManager::UpdateRepositories(uint64_t currenttime)
 {
 	UpdateComponents(Components_Action, currenttime);
 	UpdateComponents(Components_AnimatedSprite, currenttime);

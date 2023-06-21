@@ -27,7 +27,7 @@ public:
 
 	//OVERRIDES
 public:
-	virtual void _Update(uint32_t currentTime) override
+	virtual void _Update(uint64_t currentTime) override
 	{
 		if (this != nullptr)
 		{
@@ -53,7 +53,7 @@ public:
 		mfk::FindObjectInRepoAndKillIt(this, SpriteRepository);		
 	}
 public:
-	virtual void _Init(SDL_Renderer* renderer, std::vector <AnimatedSpriteComponent> &repo, std::string filepath, std::vector<uint8_t> &framesperanimation, std::unordered_map<int, int> animationmapper,  int sheetframewidth, int sheetframeheight, int ingameframewidth, int ingameframeheight, int offsetx, int offsety,  uint32_t currenttime, float singleframelength, user::SpriteLayer layer, bool usesangle, bool usesstate)
+	virtual void _Init(SDL_Renderer* renderer, std::vector <AnimatedSpriteComponent> &repo, std::string filepath, std::vector<uint8_t> &framesperanimation, std::unordered_map<int, int> animationmapper,  int sheetframewidth, int sheetframeheight, int ingameframewidth, int ingameframeheight, int offsetx, int offsety,  uint64_t currenttime, float singleframelength, user::SpriteLayer layer, bool usesangle, bool usesstate)
 	{
 		if (this != nullptr)
 		{
@@ -91,7 +91,7 @@ public:
 			NumberOfAnimations = (int)FramesPerAnimation.size();
 			FrameOnSpritesheet.y = CurrentAnimationIndex * sheetframeheight;
 			Layer = layer;
-			bUsesStateForTransform = usesstate;
+			bUsesStateForTransform = usesstate;		
 		}
 	}
 
@@ -105,8 +105,8 @@ protected:
 	std::pair<int, int> SpritesheetDimensions;
 	SDL_Rect FrameOnSpritesheet;
 	SDL_Rect FrameInGame;	
-	uint32_t Time_Current;
-	uint32_t Time_StartOfCurrentFrame;
+	uint64_t Time_Current;
+	uint64_t Time_StartOfCurrentFrame;
 	float SingleFrameLength;
 	int NumberOfAnimations;
 	uint8_t CurrentAnimationIndex;

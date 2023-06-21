@@ -15,7 +15,7 @@ MovementSystem::MovementSystem(ComponentsManager* componentsmanager, EntitiesMan
 }
 MovementSystem::~MovementSystem(){}
 
-void MovementSystem::_MoveAll(uint32_t deltaTime)
+void MovementSystem::_MoveAll(uint64_t deltaTime)
 {
 	for (auto& Movement : Manager_Components->Components_Movement)
 	{
@@ -47,7 +47,7 @@ void MovementSystem::Set_Angle(TransformComponent* TransformPtr, AnimatedSpriteC
 	SpritePtr->SpriteAngle = Get_AngleBetweenPoints(0, 0, vectorangle.x, vectorangle.y);
 	TransformPtr->TransformAngle = vectorangle;
 }
-void MovementSystem::ApplyMovement(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, uint32_t deltaTime)
+void MovementSystem::ApplyMovement(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, uint64_t deltaTime)
 {
 	if (StatePtr->m_CurrentState == user::State::MOVING)
 	{
@@ -66,7 +66,7 @@ void MovementSystem::ApplyMovement(MovementComponent* MovementPtr, TransformComp
 			}
 			else
 			{
-				System_State->ChangeCurrentState(StatePtr, user::State::IDLE, user::SubState::IDLE_STANDING, Get_DirectionFromMovementVector(MovementPtr->m_Id));
+				System_State->ChangeCurrentState(StatePtr, user::State::IDLE, user::SubState::IDLE_DEFAULT, Get_DirectionFromMovementVector(MovementPtr->m_Id));
 				Update_MovementParameters(MovementPtr, StatePtr->m_CurrentSubState);
 
 				TransformPtr->PreviousFrame_X = TransformPtr->X;
