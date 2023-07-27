@@ -1,2 +1,18 @@
-﻿  Main.cpp
-  ECS_Framework.vcxproj -> D:\ECS_Framework\ECS_Framework\x64\Debug\ECS_Framework.exe
+﻿  ComponentsManager.cpp
+  EntitiesManager.cpp
+  ResourceManager.cpp
+  SystemsManager.cpp
+  ECS_Framework.cpp
+  Entity.cpp
+  ActionSystem.cpp
+  AnimationSystem.cpp
+  CollisionSystem.cpp
+  MovementSystem.cpp
+  RenderSystem.cpp
+  StateSystem.cpp
+  Main.cpp
+  CameraSystem.cpp
+  TestSystem.cpp
+  UserExtension.cpp
+  Generating Code...
+  ECS_Framework.vcxproj -> C:\Users\aruil\OneDrive\Documents\GitHub\ECS_Framework\ECS_Framework\x64\Debug\ECS_Framework.exe

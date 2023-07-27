@@ -38,7 +38,7 @@ public:
 	}
 	virtual void _DeleteFromRepository() override
 	{
-		mfk::FindObjectInRepoAndKillIt(this, StateRepository);
+		mfk::FindObjectInRepoAndKillIt(this, m_StateRepository);
 	}
 
 
@@ -49,7 +49,7 @@ public:
 		if (this != nullptr)
 		{
 			// (1) REPOSITORY
-			StateRepository = &repo;
+			m_StateRepository = &repo;
 
 			// (2) STATE
 			m_CurrentState = state;
@@ -64,7 +64,7 @@ public:
 
 protected:
 	// (1) REPOSITORY
-	std::vector<StateComponent>* StateRepository;
+	std::vector<StateComponent>* m_StateRepository;
 	// (2) DATA
 public:
 	user::State m_CurrentState;

@@ -22,11 +22,11 @@ public:
 
 	// FUNCTIONS
 public:
-	uint64_t Get_EntityId();
-	uint64_t Get_ComponentIdFromEntityByType(user::ComponentType componenttype);
-	uint64_t GenerateComponentId(user::ComponentType type);
-	std::unordered_map<user::ComponentType, uint64_t> RemoveComponentIDsFromEntity();
-	bool AddComponentToEntity(IComponent* component);
+	uint64_t _Get_EntityId();
+	uint64_t _Get_ComponentIdFromEntityByType(user::ComponentType componenttype);
+	uint64_t _GenerateComponentId(user::ComponentType type);
+	std::unordered_map<user::ComponentType, uint64_t> _RemoveComponentIDsFromEntity();
+	bool _AddComponentToEntity(IComponent* component);
 
 
 	// DATA

@@ -26,11 +26,11 @@ Entity::~Entity()
 }
 
 // GETTERS
-uint64_t Entity::Get_EntityId()
+uint64_t Entity::_Get_EntityId()
 {
 	return m_Id;
 }
-uint64_t Entity::Get_ComponentIdFromEntityByType(user::ComponentType componenttype)
+uint64_t Entity::_Get_ComponentIdFromEntityByType(user::ComponentType componenttype)
 {
 	int key = (int)componenttype;
 		
@@ -49,7 +49,7 @@ uint64_t Entity::Get_ComponentIdFromEntityByType(user::ComponentType componentty
 
 
 // MANAGEMENT
-bool Entity::AddComponentToEntity(IComponent* component)
+bool Entity::_AddComponentToEntity(IComponent* component)
 {
 	if (component->m_OwnerId == this->m_Id)
 	{
@@ -72,7 +72,7 @@ bool Entity::AddComponentToEntity(IComponent* component)
 		return false;
 	}
 }
-std::unordered_map<user::ComponentType, uint64_t> Entity::RemoveComponentIDsFromEntity()
+std::unordered_map<user::ComponentType, uint64_t> Entity::_RemoveComponentIDsFromEntity()
 {
 	std::unordered_map<user::ComponentType, uint64_t> ComponentsToBeDeletedByID;
 
@@ -90,7 +90,7 @@ std::unordered_map<user::ComponentType, uint64_t> Entity::RemoveComponentIDsFrom
 	}
 	return ComponentsToBeDeletedByID;
 }
-uint64_t Entity::GenerateComponentId(user::ComponentType type)
+uint64_t Entity::_GenerateComponentId(user::ComponentType type)
 {
 	uint64_t Id = (m_Id - 1) * (int)user::ComponentType::_NONE + (int)type;
 	return Id;

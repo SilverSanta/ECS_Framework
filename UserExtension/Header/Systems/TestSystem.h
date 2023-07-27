@@ -12,12 +12,12 @@ public:
 	~TestSystem();
 
 
-	void TestPrint();
+	void _TestPrint();
 
 
 
 
 private:
-	EntitiesManager* Manager_Entities;
-	ComponentsManager* Manager_Components;
+	EntitiesManager* m_Manager_Entities;
+	ComponentsManager* m_Manager_Components;
 };

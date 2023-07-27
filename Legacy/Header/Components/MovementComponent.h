@@ -37,7 +37,7 @@ public:
 	}
 	virtual void _DeleteFromRepository() override
 	{
-		mfk::FindObjectInRepoAndKillIt(this, MovementRepository);
+		mfk::FindObjectInRepoAndKillIt(this, m_MovementRepository);
 	}
 public:
 	virtual void _Init(float initx, float inity, float runspeed, float walkspeed, float swimspeed, float flyspeed, std::vector<MovementComponent> &repo)
@@ -45,22 +45,22 @@ public:
 		if (this != nullptr)
 		{
 			// (1) REPOSITORY
-			MovementRepository = &repo;
+			m_MovementRepository = &repo;
 
 			// (2) MOVEMENT
 			m_NormalVector.NormalBetweenTwoPoints(0.f, 0.f, initx, inity);
 					
 			m_CurrentSpeed = 0.f;
-			bIsRunning = false;
-			bIsWalking = false;
-			bIsSwimming = false;
-			bIsFlying = false;
+			m_bIsRunning = false;
+			m_bIsWalking = false;
+			m_bIsSwimming = false;
+			m_bIsFlying = false;
 
-			bHasTarget = false;
-			Target_Y = 0;
-			Target_X = 0;
+			m_bHasTarget = false;
+			m_Target_Y = 0;
+			m_Target_X = 0;
 
-			bIsAbleToMove = true;
+			m_bIsAbleToMove = true;
 			m_RunSpeed = runspeed;		
 			m_WalkSpeed = walkspeed;	
 			m_SwimSpeed = swimspeed;	
@@ -71,15 +71,15 @@ public:
 
 protected:
 	// REPOSITORY
-	std::vector<MovementComponent>* MovementRepository;
+	std::vector<MovementComponent>* m_MovementRepository;
 	// DATA
 public:
 	mfk::NormalVector2D m_NormalVector;
 
 protected:
-	bool bHasTarget;
-	float Target_X;
-	float Target_Y;
+	bool m_bHasTarget;
+	float m_Target_X;
+	float m_Target_Y;
 
 	float m_CurrentSpeed;
 	float m_WalkSpeed;
@@ -88,11 +88,11 @@ protected:
 	float m_FlySpeed;
 	float m_SpeedFactor;
 
-	bool bIsAbleToMove;
-	bool bIsRunning;
-	bool bIsWalking;	
-	bool bIsSwimming;
-	bool bIsFlying;
+	bool m_bIsAbleToMove;
+	bool m_bIsRunning;
+	bool m_bIsWalking;	
+	bool m_bIsSwimming;
+	bool m_bIsFlying;
 
 
 	// FRIEND CLASSES

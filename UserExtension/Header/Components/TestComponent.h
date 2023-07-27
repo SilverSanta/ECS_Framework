@@ -40,7 +40,7 @@ public:
 	}
 	virtual void _DeleteFromRepository() override
 	{
-		mfk::FindObjectInRepoAndKillIt(this, TestRepository);
+		mfk::FindObjectInRepoAndKillIt(this, m_TestRepository);
 	}
 
 	// FUNCTIONS
@@ -49,19 +49,19 @@ public:
 		if (this != nullptr)
 		{
 			// (1) REPOSITORY
-			TestRepository = &repo;
+			m_TestRepository = &repo;
 
 			// (2) DATA
-			TestInt = testint;
+			m_TestInt = testint;
 		}
 	}
 
 
 protected:
 	// REPOSITORY
-	std::vector<TestComponent>*TestRepository;
+	std::vector<TestComponent>*m_TestRepository;
 	// DATA
-	int TestInt;
+	int m_TestInt;
 
 	//FRIEND CLASSES
 	friend class Entity;

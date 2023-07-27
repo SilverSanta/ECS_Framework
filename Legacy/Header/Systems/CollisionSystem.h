@@ -20,11 +20,11 @@ public:
 	void _CollisionCheck_Mouse(CollisionComponent* mousecollisioncomp);
 
 private:
-	bool CollisionCheck_SquareSquare(CollisionComponent* c1, CollisionComponent* c2);
-	bool CollisionCheck_CircleCircle(CollisionComponent* c1, CollisionComponent* c2);
-	bool CollisionCheck_SquareCircle(CollisionComponent* c1, CollisionComponent* c2);
+	bool _CollisionCheck_SquareSquare(CollisionComponent* c1, CollisionComponent* c2);
+	bool _CollisionCheck_CircleCircle(CollisionComponent* c1, CollisionComponent* c2);
+	bool _CollisionCheck_SquareCircle(CollisionComponent* c1, CollisionComponent* c2);
 
 private:
-	EntitiesManager* Manager_Entities;
-	ComponentsManager* Manager_Components;
+	EntitiesManager* m_Manager_Entities;
+	ComponentsManager* m_Manager_Components;
 };

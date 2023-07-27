@@ -40,7 +40,7 @@ public:
 	}
 	virtual void _DeleteFromRepository() override
 	{
-		mfk::FindObjectInRepoAndKillIt(this, CameraRepository);
+		mfk::FindObjectInRepoAndKillIt(this, m_CameraRepository);
 	}
 
 	// FUNCTIONS
@@ -49,19 +49,19 @@ public:
 		if (this != nullptr)
 		{
 			// (1) REPOSITORY
-			CameraRepository = &repo;
+			m_CameraRepository = &repo;
 
 			// (2) DATA
 			CameraZoom = camerazoom;
-			CameraZoomMin = camerazoommin;
-			CameraZoomMax = camerazoommax;
-			CameraZoomRate = camerazoomrate;
-			CameraSpeed = cameraspeed;
+			m_CameraZoomMin = camerazoommin;
+			m_CameraZoomMax = camerazoommax;
+			m_CameraZoomRate = camerazoomrate;
+			m_CameraSpeed = cameraspeed;
 
-			HorizontalLimits_LEFT = limitsleft;
-			HorizontalLimits_RIGHT = limitsright;
-			VerticalLimits_UP = limitsup;
-			VerticalLimits_DOWN = limitsdown;
+			m_HorizontalLimits_LEFT = limitsleft;
+			m_HorizontalLimits_RIGHT = limitsright;
+			m_VerticalLimits_UP = limitsup;
+			m_VerticalLimits_DOWN = limitsdown;
 		}
 	}
 
@@ -70,18 +70,18 @@ public:
 	float CameraZoom;
 protected:
 	// REPOSITORY
-	std::vector<CameraComponent>* CameraRepository;
+	std::vector<CameraComponent>* m_CameraRepository;
 	// DATA
 	
-	float CameraZoomMin;
-	float CameraZoomMax;
-	float CameraZoomRate;
-	float CameraSpeed;
+	float m_CameraZoomMin;
+	float m_CameraZoomMax;
+	float m_CameraZoomRate;
+	float m_CameraSpeed;
 
-	float HorizontalLimits_LEFT;
-	float HorizontalLimits_RIGHT;
-	float VerticalLimits_UP;
-	float VerticalLimits_DOWN;
+	float m_HorizontalLimits_LEFT;
+	float m_HorizontalLimits_RIGHT;
+	float m_VerticalLimits_UP;
+	float m_VerticalLimits_DOWN;
 
 
 	//FRIEND CLASSES

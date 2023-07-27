@@ -7,8 +7,8 @@
 
 AnimationSystem::AnimationSystem(ComponentsManager* componentsmanager, EntitiesManager* entitiesmanager)
 {
-	Manager_Entities = entitiesmanager;
-	Manager_Components = componentsmanager;
+	m_Manager_Entities = entitiesmanager;
+	m_Manager_Components = componentsmanager;
 }
 AnimationSystem::~AnimationSystem() {
 
@@ -17,97 +17,97 @@ AnimationSystem::~AnimationSystem() {
 
 void AnimationSystem::_Update_AllAnimationsToState()
 {
-	for (auto& Sprite : Manager_Components->Components_AnimatedSprite)
+	for (auto& Sprite : m_Manager_Components->m_Components_AnimatedSprite)
 	{			
-		Entity* Entity = Manager_Entities->Get_EntityById(Sprite.Get_OwnerId());
+		Entity* Entity = m_Manager_Entities->_Get_EntityById(Sprite._Get_OwnerId());
 
 		// ENTITY HAS STATE
-		if (Entity->Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
+		if (Entity->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
 		{
-			StateComponent* State = Manager_Components->Get_ComponentPtrFromId(Entity->Get_ComponentIdFromEntityByType(user::ComponentType::STATE), Manager_Components->Components_State);
+			StateComponent* State = m_Manager_Components->_Get_ComponentPtrFromId(Entity->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE), m_Manager_Components->m_Components_State);
 
 			if (State->m_CurrentState != State->m_StateFromPreviousFrame || State->m_CurrentSubState != State->m_SubStateFromPreviousFrame || State->m_CurrentDirection != State->m_DirectionFromPreviousFrame)
 			{
-				MapAnimationToState(&Sprite);
+				_MapAnimationToState(&Sprite);
 			}
 		}
 	}
 }
 void AnimationSystem::_NextFrame_AllSprites()
 {
-	for (auto& Sprite : Manager_Components->Components_AnimatedSprite)
+	for (auto& Sprite : m_Manager_Components->m_Components_AnimatedSprite)
 	{
-		Entity* Entity = Manager_Entities->Get_EntityById(Sprite.Get_OwnerId());
+		Entity* Entity = m_Manager_Entities->_Get_EntityById(Sprite._Get_OwnerId());
 
 		// ENTITY HAS STATE
-		if (Entity->Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
+		if (Entity->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
 		{
-			StateComponent* State = Manager_Components->Get_ComponentPtrFromId(Entity->Get_ComponentIdFromEntityByType(user::ComponentType::STATE), Manager_Components->Components_State);
+			StateComponent* State = m_Manager_Components->_Get_ComponentPtrFromId(Entity->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE), m_Manager_Components->m_Components_State);
 
 			if (State != nullptr)
 			{
-				NextFrame(&Sprite);
+				_NextFrame(&Sprite);
 			}
 		}
 		// ENTITY DOES NOT HAVE STATE
 		else
 		{
-			NextFrame(&Sprite);
+			_NextFrame(&Sprite);
 		}
 	}
 }
 
-void AnimationSystem::Set_FrameIndex(AnimatedSpriteComponent* SpritePtr, uint8_t index)
+void AnimationSystem::_Set_FrameIndex(AnimatedSpriteComponent* SpritePtr, uint8_t index)
 {
-	SpritePtr->CurrentFrameIndex = index % SpritePtr->FramesPerAnimation.at(SpritePtr->CurrentAnimationIndex);
-	SpritePtr->FrameOnSpritesheet.x = SpritePtr->CurrentFrameIndex * SpritePtr->FrameOnSpritesheet.w;
+	SpritePtr->m_CurrentFrameIndex = index % SpritePtr->m_FramesPerAnimation.at(SpritePtr->m_CurrentAnimationIndex);
+	SpritePtr->m_FrameOnSpritesheet.x = SpritePtr->m_CurrentFrameIndex * SpritePtr->m_FrameOnSpritesheet.w;
 }
-void AnimationSystem::Set_AnimationIndex(AnimatedSpriteComponent* SpritePtr, uint8_t index)
+void AnimationSystem::_Set_AnimationIndex(AnimatedSpriteComponent* SpritePtr, uint8_t index)
 {
-	SpritePtr->CurrentAnimationIndex = index % SpritePtr->NumberOfAnimations;
-	SpritePtr->FrameOnSpritesheet.y = SpritePtr->CurrentAnimationIndex * SpritePtr->FrameOnSpritesheet.h;
+	SpritePtr->m_CurrentAnimationIndex = index % SpritePtr->m_NumberOfAnimations;
+	SpritePtr->m_FrameOnSpritesheet.y = SpritePtr->m_CurrentAnimationIndex * SpritePtr->m_FrameOnSpritesheet.h;
 
-	Set_FrameIndex(SpritePtr, 0);
+	_Set_FrameIndex(SpritePtr, 0);
 }
 
-void AnimationSystem::NextFrame(AnimatedSpriteComponent* Sprite)
+void AnimationSystem::_NextFrame(AnimatedSpriteComponent* Sprite)
 {
 	//Check if there are more frames than just 1 and if enough time has passed
-	if ((Sprite->FrameOnSpritesheet.w < Sprite->SpritesheetDimensions.first) && (Sprite->Time_Current - Sprite->Time_StartOfCurrentFrame >= Sprite->SingleFrameLength*1000))
+	if ((Sprite->m_FrameOnSpritesheet.w < Sprite->m_SpritesheetDimensions.first) && (Sprite->m_Time_Current - Sprite->m_Time_StartOfCurrentFrame >= Sprite->m_SingleFrameLength*1000))
 	{
-		Set_FrameIndex(Sprite, Sprite->CurrentFrameIndex + 1);		
-		Sprite->Time_StartOfCurrentFrame = Sprite->Time_Current;
+		_Set_FrameIndex(Sprite, Sprite->m_CurrentFrameIndex + 1);		
+		Sprite->m_Time_StartOfCurrentFrame = Sprite->m_Time_Current;
 	}
 }
-void AnimationSystem::ChangeAnimationTo(AnimatedSpriteComponent* SpritePtr, int animationindex)
+void AnimationSystem::_ChangeAnimationTo(AnimatedSpriteComponent* SpritePtr, int animationindex)
 {
-	if (animationindex > SpritePtr->NumberOfAnimations)
+	if (animationindex > SpritePtr->m_NumberOfAnimations)
 	{
-		Set_AnimationIndex(SpritePtr, 0);
+		_Set_AnimationIndex(SpritePtr, 0);
 	}
 	else
 	{
-		Set_AnimationIndex(SpritePtr, animationindex);
+		_Set_AnimationIndex(SpritePtr, animationindex);
 	}
 }
-void AnimationSystem::MapAnimationToState(AnimatedSpriteComponent* SpritePtr)
+void AnimationSystem::_MapAnimationToState(AnimatedSpriteComponent* SpritePtr)
 {
-	Entity* Entity = Manager_Entities->Get_EntityById(SpritePtr->Get_OwnerId());
-	StateComponent* StatePtr = Manager_Components->Get_ComponentPtrFromId(Entity->Get_ComponentIdFromEntityByType(user::ComponentType::STATE), Manager_Components->Components_State);
+	Entity* Entity = m_Manager_Entities->_Get_EntityById(SpritePtr->_Get_OwnerId());
+	StateComponent* StatePtr = m_Manager_Components->_Get_ComponentPtrFromId(Entity->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE), m_Manager_Components->m_Components_State);
 
-	if (StatePtr != nullptr && SpritePtr->bUsesStateForTransform == true)
+	if (StatePtr != nullptr && SpritePtr->m_bUsesStateForTransform == true)
 	{
 		int CurrentTotalState = StateSystem::_GenerateTotalState(StatePtr->m_CurrentState, StatePtr->m_CurrentSubState, StatePtr->m_CurrentDirection);
 		int AnimationIndexFromMapper;
-		if (SpritePtr->Mapper.find(CurrentTotalState) == SpritePtr->Mapper.end())
+		if (SpritePtr->m_Mapper.find(CurrentTotalState) == SpritePtr->m_Mapper.end())
 		{
 			AnimationIndexFromMapper = 0;
 		}
 		else
 		{			
-			AnimationIndexFromMapper = SpritePtr->Mapper.at(CurrentTotalState);
+			AnimationIndexFromMapper = SpritePtr->m_Mapper.at(CurrentTotalState);
 		}
 
-		ChangeAnimationTo(SpritePtr, AnimationIndexFromMapper);
+		_ChangeAnimationTo(SpritePtr, AnimationIndexFromMapper);
 	}
 }

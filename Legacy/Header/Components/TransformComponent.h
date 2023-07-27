@@ -38,7 +38,7 @@ public:
 	}
 	virtual void _DeleteFromRepository() override
 	{
-		mfk::FindObjectInRepoAndKillIt(this, TransformRepository);
+		mfk::FindObjectInRepoAndKillIt(this, m_TransformRepository);
 	}
 
 
@@ -49,39 +49,39 @@ public:
 		if (this != nullptr)
 		{
 			// (1) REPOSITORY
-			TransformRepository = &repo;
+			m_TransformRepository = &repo;
 
 
 			// (2) TRANSFORM
-			X = x;
-			Y = y;
-			PreviousFrame_X = x;
-			PreviousFrame_Y = y;
+			m_X = x;
+			m_Y = y;
+			m_PreviousFrame_X = x;
+			m_PreviousFrame_Y = y;
 
-			TransformAngle.x = 0;
-			TransformAngle.y = 0;
+			m_TransformAngle.x = 0;
+			m_TransformAngle.y = 0;
 
 			// (3) CAMERA
-			bSusceptibleToCameraMovement = usescameratransform;
-			bSusceptibleToCameraZoom = usescamerazoom;
+			m_bSusceptibleToCameraMovement = usescameratransform;
+			m_bSusceptibleToCameraZoom = usescamerazoom;
 		}
 	}
 
 
 protected:
 	// REPOSITORY
-	std::vector<TransformComponent>* TransformRepository;
+	std::vector<TransformComponent>* m_TransformRepository;
 	// DATA
 public:
-	float X;
-	float Y;
-	float PreviousFrame_X;
-	float PreviousFrame_Y;
+	float m_X;
+	float m_Y;
+	float m_PreviousFrame_X;
+	float m_PreviousFrame_Y;
 
-	bool bSusceptibleToCameraMovement;
-	bool bSusceptibleToCameraZoom;
+	bool m_bSusceptibleToCameraMovement;
+	bool m_bSusceptibleToCameraZoom;
 	
-	mfk::NormalVector2D TransformAngle;
+	mfk::NormalVector2D m_TransformAngle;
 	
 
 	//FRIEND CLASSES

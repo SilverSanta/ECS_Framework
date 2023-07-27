@@ -24,74 +24,69 @@ public:
 	//FUNCTIONS
 public:
 	//Getters
-	SDL_Renderer* Get_Renderer() const;
-	SDL_Window* Get_Window();
-	std::pair<uint16_t, uint16_t> Get_WindowDimensions();
+	SDL_Renderer* _Get_Renderer() const;
+	SDL_Window* _Get_Window();
+	std::pair<uint16_t, uint16_t> _Get_WindowDimensions();
 
-
-	uint64_t Get_CurrentTickInGame();
-	uint64_t Get_CurrentTickInMenu();
-	uint64_t Get_DeltaTicksInGame();
-
+	uint64_t _Get_CurrentTickInGame();
+	uint64_t _Get_CurrentTickInMenu();
+	uint64_t _Get_DeltaTicksInGame();
 
 	//Run game loop
-	void RunGameLoop();
-	void StartGame();
-	void EndGame();
-
+	void _RunGameLoop();
+	void _StartGame();
+	void _EndGame();
 
 	//Booleans for main loop
-	bool ProgramIsRunning();
-	bool InMenu();
-	bool GameIsRunning();
-
+	bool _ProgramIsRunning();
+	bool _InMenu();
+	bool _GameIsRunning();
 
 	//Setters
-	void Set_Resolution(int w, int h);
-	void Set_FrameRate(int framerate);
-	void Set_ProgramIsRunning(bool isrunning);
-	void Set_InMenu(bool inmenu);
-	void Set_GameIsRunning(bool isrunning);
+	void _Set_Resolution(int w, int h);
+	void _Set_FrameRate(int framerate);
+	void _Set_ProgramIsRunning(bool isrunning);
+	void _Set_InMenu(bool inmenu);
 
 	//Handlers of framerate
-	void HandleLoopStart_InGame();
-	void HandleLoopStart_InMenu();
+	void _HandleLoopStart_InGame();
+	void _HandleLoopStart_InMenu();
 	
 	//Setting callbacks
-	void Set_EventCallback(std::function<void(void)> func);
-	void Set_RenderCallback(std::function<void(void)> func);
-	void Set_LogicCallback(std::function<void(void)> func);
-	void EventCallback();
-	void LogicCallback();	
-	void RenderCallback();
+	void _Set_EventCallback(std::function<void(void)> func);
+	void _Set_RenderCallback(std::function<void(void)> func);
+	void _Set_LogicCallback(std::function<void(void)> func);
+	void _EventCallback();
+	void _LogicCallback();	
+	void _RenderCallback();
 
-	void Set_MenuEventCallback(std::function<void(void)> func);
-	void Set_MenuRenderCallback(std::function<void(void)> func);
-	void Set_MenuLogicCallback(std::function<void(void)> func);
-	void MenuEventCallback();
-	void MenuLogicCallback();
-	void MenuRenderCallback();
+	void _Set_MenuEventCallback(std::function<void(void)> func);
+	void _Set_MenuRenderCallback(std::function<void(void)> func);
+	void _Set_MenuLogicCallback(std::function<void(void)> func);
+	void _MenuEventCallback();
+	void _MenuLogicCallback();
+	void _MenuRenderCallback();
 
 	//Misc
-	void Set_Pixel(SDL_Surface* surface, int x, int y, uint8_t b, uint8_t g, uint8_t r);
+	void _Set_Pixel(SDL_Surface* surface, int x, int y, uint8_t b, uint8_t g, uint8_t r);
 
 	//Ticks
-	void Tick_GetCurrentTick();
+	void _Tick_GetCurrentTick();
 
 
 public:
 	//Camera transforms (ingame, menu -> for switching between them)
-	std::pair<float, float> CameraTransform_SavedInGame; //LAST LOCATION INGAME BEFORE GOING TO MENU
-	std::pair<float, float> CameraTransform_Menu; //LOCATION OF MENU
-	std::pair<float, float> CameraTransform_InGameForAnchoring; //ANCHOR LOCATION FOR DRAGGING WITH MOUSE
+	std::pair<float, float> m_CameraTransform_SavedInGame; //LAST LOCATION INGAME BEFORE GOING TO MENU
+	std::pair<float, float> m_CameraTransform_Menu; //LOCATION OF MENU
+	std::pair<float, float> m_CameraTransform_InGameForAnchoring; //ANCHOR LOCATION FOR DRAGGING WITH MOUSE
 
 	//Mouse position (both ingame and in menu
-	std::pair<int, int> MousePos;
+	std::pair<int, int> m_MousePos;
 
 private:
 	//Window dimensions
-	int WindowWidth;
-	int WindowHeight;
+	int m_WindowWidth;
+	int m_WindowHeight;
 
 	//For constructor
 	SDL_Window* m_window = nullptr;
@@ -100,25 +95,25 @@ private:
 
 
 	//Ticks
-	uint64_t Tick_Current{ 0 };
+	uint64_t m_Tick_Current{ 0 };
 
 	//Ticks - in game
-	uint64_t Tick_CurrentInGame{ 0 };
-	uint64_t Tick_PreviousInGame{ 0 };
-	uint64_t DeltaTicks_InGame{ 0 };
+	uint64_t m_Tick_CurrentInGame{ 0 };
+	uint64_t m_Tick_PreviousInGame{ 0 };
+	uint64_t m_DeltaTicks_InGame{ 0 };
 
 	//Ticks - in menu
-	uint64_t Tick_CurrentInMenu{ 0 };
-	uint64_t Tick_PreviousInMenu{ 0 };
-	uint64_t DeltaTicks_InMenu{ 0 };
+	uint64_t m_Tick_CurrentInMenu{ 0 };
+	uint64_t m_Tick_PreviousInMenu{ 0 };
+	uint64_t m_DeltaTicks_InMenu{ 0 };
 
-	int FrameRate = 30;
-	bool bSufficientTimePassedBetweenFrames = false;
+	int m_FrameRate = 30;
+	bool m_bSufficientTimePassedBetweenFrames = false;
 
 	//Loop bools
-	bool bProgramIsRunning = true; // Entire program (so menu loop AND game loop)
-	bool bInMenu = true; // if grue-> menu loop, if false -> ingame loop
-	bool bGameIsRunning = false; // starts false (game needs to start from menu) and then is TRUE until game is DONE (which should return to main menu)
+	bool m_bProgramIsRunning = true; // Entire program (so menu loop AND game loop)
+	bool m_bInMenu = true; // if grue-> menu loop, if false -> ingame loop
+	bool m_bGameIsRunning = false; // starts false (game needs to start from menu) and then is TRUE until game is DONE (which should return to main menu)
 
 
 	//Callbacks

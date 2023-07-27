@@ -120,16 +120,16 @@ typedef enum
     ((1 << 28) | ((type) << 24) | ((order) << 20) | ((layout) << 16) | \
      ((bits) << 8) | ((bytes) << 0))
 
-#define SDL_PIXELFLAG(X)    (((X) >> 28) & 0x0F)
-#define SDL_PIXELTYPE(X)    (((X) >> 24) & 0x0F)
-#define SDL_PIXELORDER(X)   (((X) >> 20) & 0x0F)
-#define SDL_PIXELLAYOUT(X)  (((X) >> 16) & 0x0F)
-#define SDL_BITSPERPIXEL(X) (((X) >> 8) & 0xFF)
-#define SDL_BYTESPERPIXEL(X) \
-    (SDL_ISPIXELFORMAT_FOURCC(X) ? \
-        ((((X) == SDL_PIXELFORMAT_YUY2) || \
-          ((X) == SDL_PIXELFORMAT_UYVY) || \
-          ((X) == SDL_PIXELFORMAT_YVYU)) ? 2 : 1) : (((X) >> 0) & 0xFF))
+#define SDL_PIXELFLAG(m_X)    (((m_X) >> 28) & 0x0F)
+#define SDL_PIXELTYPE(m_X)    (((m_X) >> 24) & 0x0F)
+#define SDL_PIXELORDER(m_X)   (((m_X) >> 20) & 0x0F)
+#define SDL_PIXELLAYOUT(m_X)  (((m_X) >> 16) & 0x0F)
+#define SDL_BITSPERPIXEL(m_X) (((m_X) >> 8) & 0xFF)
+#define SDL_BYTESPERPIXEL(m_X) \
+    (SDL_ISPIXELFORMAT_FOURCC(m_X) ? \
+        ((((m_X) == SDL_PIXELFORMAT_YUY2) || \
+          ((m_X) == SDL_PIXELFORMAT_UYVY) || \
+          ((m_X) == SDL_PIXELFORMAT_YVYU)) ? 2 : 1) : (((m_X) >> 0) & 0xFF))
 
 #define SDL_ISPIXELFORMAT_INDEXED(format)   \
     (!SDL_ISPIXELFORMAT_FOURCC(format) && \

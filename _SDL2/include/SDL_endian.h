@@ -317,14 +317,14 @@ SDL_SwapFloat(float x)
  */
 /* @{ */
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
-#define SDL_SwapLE16(X)     (X)
-#define SDL_SwapLE32(X)     (X)
-#define SDL_SwapLE64(X)     (X)
-#define SDL_SwapFloatLE(X)  (X)
-#define SDL_SwapBE16(X)     SDL_Swap16(X)
-#define SDL_SwapBE32(X)     SDL_Swap32(X)
-#define SDL_SwapBE64(X)     SDL_Swap64(X)
-#define SDL_SwapFloatBE(X)  SDL_SwapFloat(X)
+#define SDL_SwapLE16(m_X)     (m_X)
+#define SDL_SwapLE32(m_X)     (m_X)
+#define SDL_SwapLE64(m_X)     (m_X)
+#define SDL_SwapFloatLE(m_X)  (m_X)
+#define SDL_SwapBE16(m_X)     SDL_Swap16(m_X)
+#define SDL_SwapBE32(m_X)     SDL_Swap32(m_X)
+#define SDL_SwapBE64(m_X)     SDL_Swap64(m_X)
+#define SDL_SwapFloatBE(m_X)  SDL_SwapFloat(m_X)
 #else
 #define SDL_SwapLE16(X)     SDL_Swap16(X)
 #define SDL_SwapLE32(X)     SDL_Swap32(X)

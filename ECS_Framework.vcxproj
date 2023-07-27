@@ -112,7 +112,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)_SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -161,6 +161,7 @@
     <ClInclude Include="Legacy\Header\Components\IComponent.h" />
     <ClInclude Include="Legacy\Header\Components\MovementComponent.h" />
     <ClInclude Include="Legacy\Header\Components\StateComponent.h" />
+    <ClInclude Include="Legacy\Header\Components\TextComponent.h" />
     <ClInclude Include="Legacy\Header\Components\TransformComponent.h" />
     <ClInclude Include="Legacy\Header\Managers\ComponentsManager.h" />
     <ClInclude Include="Legacy\Header\Managers\EntitiesManager.h" />

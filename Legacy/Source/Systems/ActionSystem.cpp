@@ -14,54 +14,54 @@
 // CONSTRUCTORS
 ActionSystem::ActionSystem(ComponentsManager* componentsmanager, EntitiesManager* entitiesmanager, MovementSystem* systemmovement, StateSystem* statesystem)
 {
-	Manager_Entities = entitiesmanager;
-	Manager_Components = componentsmanager;
-	System_Movement = systemmovement;
-	System_State = statesystem;
+	m_Manager_Entities = entitiesmanager;
+	m_Manager_Components = componentsmanager;
+	m_System_Movement = systemmovement;
+	m_System_State = statesystem;
 }
 ActionSystem::~ActionSystem(){}
 
 
 // DEFINITIONS
-void ActionSystem::Action_StopMoving(MovementComponent* MovementPtr, StateComponent* StatePtr)
+void ActionSystem::_Action_StopMoving(MovementComponent* MovementPtr, StateComponent* StatePtr)
 {
 	if (MovementPtr != nullptr && StatePtr != nullptr)
 	{
-		System_State->ChangeCurrentState(StatePtr, user::State::IDLE, user::SubState::IDLE_DEFAULT, StatePtr->m_CurrentDirection);
+		m_System_State->_ChangeCurrentState(StatePtr, user::State::IDLE, user::SubState::IDLE_DEFAULT, StatePtr->m_CurrentDirection);
 	}
 }
-void ActionSystem::Action_WalkTo(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, float targetx, float targety)
+void ActionSystem::_Action_WalkTo(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, float targetx, float targety)
 {
 	if (TransformPtr != nullptr && MovementPtr != nullptr && StatePtr != nullptr)
 	{
 		// (1) HEADING
-		MovementPtr->m_NormalVector.NormalBetweenTwoPoints(TransformPtr->X, TransformPtr->Y, targetx, targety);
+		MovementPtr->m_NormalVector.NormalBetweenTwoPoints(TransformPtr->m_X, TransformPtr->m_Y, targetx, targety);
 
 		// (2) Setting the target
-		MovementPtr->Target_X = targetx;
-		MovementPtr->Target_Y = targety;
-		MovementPtr->bHasTarget = true;
+		MovementPtr->m_Target_X = targetx;
+		MovementPtr->m_Target_Y = targety;
+		MovementPtr->m_bHasTarget = true;
 
 		// (3) Walk
-		Action_Walk(MovementPtr, StatePtr);
+		_Action_Walk(MovementPtr, StatePtr);
 	}
 }
-void ActionSystem::Action_Walk(MovementComponent* MovementPtr, StateComponent* StatePtr)
+void ActionSystem::_Action_Walk(MovementComponent* MovementPtr, StateComponent* StatePtr)
 {
 	if (MovementPtr != nullptr && StatePtr != nullptr)
 	{
-		System_State->ChangeCurrentState(StatePtr, user::State::MOVING, user::SubState::MOVING_WALKING, StatePtr->m_CurrentDirection);
+		m_System_State->_ChangeCurrentState(StatePtr, user::State::MOVING, user::SubState::MOVING_WALKING, StatePtr->m_CurrentDirection);
 	}
 }
-void ActionSystem::Action_Attack(uint64_t AttackerID, uint64_t DefenderID)
+void ActionSystem::_Action_Attack(uint64_t AttackerID, uint64_t DefenderID)
 {
-	Entity* Attacker = Manager_Entities->Get_EntityById(AttackerID);
+	Entity* Attacker = m_Manager_Entities->_Get_EntityById(AttackerID);
 
-	if (Attacker->Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
+	if (Attacker->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
 	{
 		// Change state of the attacked to ATTACKING
-		StateComponent* Attacker_State = Manager_Components->Get_ComponentPtrFromId(Attacker->Get_ComponentIdFromEntityByType(user::ComponentType::STATE), Manager_Components->Components_State);
-		System_State->ChangeCurrentState(Attacker_State, user::State::TAKING_ACTION, user::SubState::ACTION_ATTACKING, Attacker_State->m_CurrentDirection);
+		StateComponent* Attacker_State = m_Manager_Components->_Get_ComponentPtrFromId(Attacker->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE), m_Manager_Components->m_Components_State);
+		m_System_State->_ChangeCurrentState(Attacker_State, user::State::TAKING_ACTION, user::SubState::ACTION_ATTACKING, Attacker_State->m_CurrentDirection);
 
 
 
@@ -73,26 +73,26 @@ void ActionSystem::Action_Attack(uint64_t AttackerID, uint64_t DefenderID)
 		// WIP
 	}
 }
-void ActionSystem::Action_DropDead(uint64_t DyingAgentID)
+void ActionSystem::_Action_DropDead(uint64_t DyingAgentID)
 {
-	Entity* DyingAgent = Manager_Entities->Get_EntityById(DyingAgentID);
+	Entity* DyingAgent = m_Manager_Entities->_Get_EntityById(DyingAgentID);
 
-	if (DyingAgent->Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
+	if (DyingAgent->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
 	{
 		// Change state of the dying agend to DROPPINGDEAD		
-		StateComponent* DyingAgent_State = Manager_Components->Get_ComponentPtrFromId(DyingAgent->Get_ComponentIdFromEntityByType(user::ComponentType::STATE), Manager_Components->Components_State);
-		System_State->ChangeCurrentState(DyingAgent_State, user::State::DYING, user::SubState::DYING_NORMAL, DyingAgent_State->m_CurrentDirection);
+		StateComponent* DyingAgent_State = m_Manager_Components->_Get_ComponentPtrFromId(DyingAgent->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE), m_Manager_Components->m_Components_State);
+		m_System_State->_ChangeCurrentState(DyingAgent_State, user::State::DYING, user::SubState::DYING_NORMAL, DyingAgent_State->m_CurrentDirection);
 	}
 }
-void ActionSystem::Action_UsePotion(uint64_t UnitID)
+void ActionSystem::_Action_UsePotion(uint64_t UnitID)
 {
-	Entity* Unit = Manager_Entities->Get_EntityById(UnitID);
+	Entity* Unit = m_Manager_Entities->_Get_EntityById(UnitID);
 
-	if (Unit->Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
+	if (Unit->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE) != NULL)
 	{
 		// Change state of the attacked to ATTACKING
-		StateComponent* Unit_State = Manager_Components->Get_ComponentPtrFromId(Unit->Get_ComponentIdFromEntityByType(user::ComponentType::STATE), Manager_Components->Components_State);
-		System_State->ChangeCurrentState(Unit_State, user::State::TAKING_ACTION, user::SubState::ACTION_USING_POTION, Unit_State->m_CurrentDirection);
+		StateComponent* Unit_State = m_Manager_Components->_Get_ComponentPtrFromId(Unit->_Get_ComponentIdFromEntityByType(user::ComponentType::STATE), m_Manager_Components->m_Components_State);
+		m_System_State->_ChangeCurrentState(Unit_State, user::State::TAKING_ACTION, user::SubState::ACTION_USING_POTION, Unit_State->m_CurrentDirection);
 
 
 

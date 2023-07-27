@@ -17,14 +17,14 @@ public:
 	void _Update_AllAnimationsToState();
 	void _NextFrame_AllSprites();	
 private:
-	void NextFrame(AnimatedSpriteComponent* Sprite);
-	void ChangeAnimationTo(AnimatedSpriteComponent* SpritePtr, int animationindex);
-	void MapAnimationToState(AnimatedSpriteComponent* Sprite);
-	void Set_FrameIndex(AnimatedSpriteComponent* SpritePtr, uint8_t index);
-	void Set_AnimationIndex(AnimatedSpriteComponent* SpritePtr, uint8_t index);
+	void _NextFrame(AnimatedSpriteComponent* Sprite);
+	void _ChangeAnimationTo(AnimatedSpriteComponent* SpritePtr, int animationindex);
+	void _MapAnimationToState(AnimatedSpriteComponent* Sprite);
+	void _Set_FrameIndex(AnimatedSpriteComponent* SpritePtr, uint8_t index);
+	void _Set_AnimationIndex(AnimatedSpriteComponent* SpritePtr, uint8_t index);
 
 
 private:
-	EntitiesManager* Manager_Entities;
-	ComponentsManager* Manager_Components;
+	EntitiesManager* m_Manager_Entities;
+	ComponentsManager* m_Manager_Components;
 };

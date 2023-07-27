@@ -23,17 +23,17 @@ public:
 
 
 private:
-	void UpdateState_PreviousToCurrent(StateComponent* stateptr);
-	void ChangeCurrentState(StateComponent* stateptr, user::State newstate, user::SubState newsubstate, user::Direction newdirection);
-	void ReturnToIdle(StateComponent* stateptr);
-	void Set_State(StateComponent* StatePtr, user::State state);
-	void Set_SubState(StateComponent* StatePtr, user::SubState substate);
-	void Set_Direction(StateComponent* StatePtr, user::Direction direction);
-	bool CheckForInterruptability(user::State newstate, user::State currentstate);
+	void _UpdateState_PreviousToCurrent(StateComponent* stateptr);
+	void _ChangeCurrentState(StateComponent* stateptr, user::State newstate, user::SubState newsubstate, user::Direction newdirection);
+	void _ReturnToIdle(StateComponent* stateptr);
+	void _Set_State(StateComponent* StatePtr, user::State state);
+	void _Set_SubState(StateComponent* StatePtr, user::SubState substate);
+	void _Set_Direction(StateComponent* StatePtr, user::Direction direction);
+	bool _CheckForInterruptability(user::State newstate, user::State currentstate);
 		
 private:
-	EntitiesManager* Manager_Entities;
-	ComponentsManager* Manager_Components;
+	EntitiesManager* m_Manager_Entities;
+	ComponentsManager* m_Manager_Components;
 
 
 	friend class ActionSystem;

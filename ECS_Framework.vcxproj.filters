@@ -182,5 +182,8 @@
     <ClInclude Include="UserExtension\Header\Components\CameraComponent.h">
       <Filter>UserExtension\Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Legacy\Header\Components\TextComponent.h">
+      <Filter>Legacy\Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -98,8 +98,8 @@ typedef struct SDL_version
  *  and 2.255.99 would be encoded as 25799.
  *  This macro will not be available in SDL 3.x.
  */
-#define SDL_VERSIONNUM(X, Y, Z)                     \
-    ((X)*1000 + (Y)*100 + (Z))
+#define SDL_VERSIONNUM(m_X, m_Y, Z)                     \
+    ((m_X)*1000 + (m_Y)*100 + (Z))
 
 /**
  *  This is the version number macro for the current SDL version.
@@ -117,10 +117,10 @@ typedef struct SDL_version
 /**
  *  This macro will evaluate to true if compiled with SDL at least X.Y.Z.
  */
-#define SDL_VERSION_ATLEAST(X, Y, Z) \
-    ((SDL_MAJOR_VERSION >= X) && \
-     (SDL_MAJOR_VERSION > X || SDL_MINOR_VERSION >= Y) && \
-     (SDL_MAJOR_VERSION > X || SDL_MINOR_VERSION > Y || SDL_PATCHLEVEL >= Z))
+#define SDL_VERSION_ATLEAST(m_X, m_Y, Z) \
+    ((SDL_MAJOR_VERSION >= m_X) && \
+     (SDL_MAJOR_VERSION > m_X || SDL_MINOR_VERSION >= m_Y) && \
+     (SDL_MAJOR_VERSION > m_X || SDL_MINOR_VERSION > m_Y || SDL_PATCHLEVEL >= Z))
 
 /**
  * Get the version of SDL that is linked against your program.

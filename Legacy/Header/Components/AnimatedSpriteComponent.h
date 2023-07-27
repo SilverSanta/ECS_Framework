@@ -31,26 +31,26 @@ public:
 	{
 		if (this != nullptr)
 		{
-			Time_Current = currentTime;
+			m_Time_Current = currentTime;
 		}
 	}
 	virtual void _Render(SDL_Renderer* renderer) override
 	{
 		if (this != nullptr)
 		{
-			if (bUsesTransformAngleForSpriteRotation == true)
+			if (m_bUsesTransformAngleForSpriteRotation == true)
 			{
-				SDL_RenderCopyEx(renderer, Spritesheet, &FrameOnSpritesheet, &FrameInGame, SpriteAngle, NULL, SDL_RendererFlip::SDL_FLIP_NONE);
+				SDL_RenderCopyEx(renderer, m_Spritesheet, &m_FrameOnSpritesheet, &m_FrameInGame, m_SpriteAngle, NULL, SDL_RendererFlip::SDL_FLIP_NONE);
 			}
 			else
 			{
-				SDL_RenderCopy(renderer, Spritesheet, &FrameOnSpritesheet, &FrameInGame);
+				SDL_RenderCopy(renderer, m_Spritesheet, &m_FrameOnSpritesheet, &m_FrameInGame);
 			}
 		}
 	}
 	virtual void _DeleteFromRepository() override
 	{
-		mfk::FindObjectInRepoAndKillIt(this, SpriteRepository);		
+		mfk::FindObjectInRepoAndKillIt(this, m_SpriteRepository);		
 	}
 public:
 	virtual void _Init(SDL_Renderer* renderer, std::vector <AnimatedSpriteComponent> &repo, std::string filepath, std::vector<uint8_t> &framesperanimation, std::unordered_map<int, int> animationmapper,  int sheetframewidth, int sheetframeheight, int ingameframewidth, int ingameframeheight, int offsetx, int offsety,  uint64_t currenttime, float singleframelength, user::SpriteLayer layer, bool usesangle, bool usesstate)
@@ -58,65 +58,65 @@ public:
 		if (this != nullptr)
 		{
 			// (1) REPOSITORY
-			SpriteRepository = &repo;
+			m_SpriteRepository = &repo;
 
 			// (2) FRAMES
-			FrameOnSpritesheet.w = sheetframewidth;
-			FrameOnSpritesheet.h = sheetframeheight;
+			m_FrameOnSpritesheet.w = sheetframewidth;
+			m_FrameOnSpritesheet.h = sheetframeheight;
 
-			FrameInGame.w = ingameframewidth;
-			FrameInGame.h = ingameframeheight;
+			m_FrameInGame.w = ingameframewidth;
+			m_FrameInGame.h = ingameframeheight;
 
 
 			// (3) OFFSET FROM ORIGIN AND ROTATION
-			OffsetFromOrigin.first = offsetx;
-			OffsetFromOrigin.second = offsety;
-			bUsesTransformAngleForSpriteRotation = usesangle;
-			SpriteAngle = 0;
+			m_OffsetFromOrigin.first = offsetx;
+			m_OffsetFromOrigin.second = offsety;
+			m_bUsesTransformAngleForSpriteRotation = usesangle;
+			m_SpriteAngle = 0;
 
 			// (4) SPRITESHEET
-			SDL_Surface* image = ResourceManager::Get_Instance().Get_Surface(filepath);
-			Spritesheet = SDL_CreateTextureFromSurface(renderer, image);
-			SpritesheetDimensions.first = image->w;
-			SpritesheetDimensions.second = image->h;
+			SDL_Surface* m_image = ResourceManager::_Get_Instance()._Get_Surface(filepath);
+			m_Spritesheet = SDL_CreateTextureFromSurface(renderer, m_image);
+			m_SpritesheetDimensions.first = m_image->w;
+			m_SpritesheetDimensions.second = m_image->h;
 
 
 			// (5) ANIMATION
-			Mapper = animationmapper;
-			Time_StartOfCurrentFrame = currenttime;
-			SingleFrameLength = singleframelength;
-			FramesPerAnimation = framesperanimation;
-			CurrentFrameIndex = 0;
-			CurrentAnimationIndex = 1;
-			NumberOfAnimations = (int)FramesPerAnimation.size();
-			FrameOnSpritesheet.y = CurrentAnimationIndex * sheetframeheight;
-			Layer = layer;
-			bUsesStateForTransform = usesstate;		
+			m_Mapper = animationmapper;
+			m_Time_StartOfCurrentFrame = currenttime;
+			m_SingleFrameLength = singleframelength;
+			m_FramesPerAnimation = framesperanimation;
+			m_CurrentFrameIndex = 0;
+			m_CurrentAnimationIndex = 1;
+			m_NumberOfAnimations = (int)m_FramesPerAnimation.size();
+			m_FrameOnSpritesheet.y = m_CurrentAnimationIndex * sheetframeheight;
+			m_Layer = layer;
+			m_bUsesStateForTransform = usesstate;		
 		}
 	}
 
 
 protected:
 	// REPOSITORY
-	std::vector <AnimatedSpriteComponent>* SpriteRepository;
+	std::vector <AnimatedSpriteComponent>* m_SpriteRepository;
 	// DATA
-	std::pair<int, int> OffsetFromOrigin;
-	SDL_Texture* Spritesheet;
-	std::pair<int, int> SpritesheetDimensions;
-	SDL_Rect FrameOnSpritesheet;
-	SDL_Rect FrameInGame;	
-	uint64_t Time_Current;
-	uint64_t Time_StartOfCurrentFrame;
-	float SingleFrameLength;
-	int NumberOfAnimations;
-	uint8_t CurrentAnimationIndex;
-	uint8_t CurrentFrameIndex;
-	std::vector <uint8_t> FramesPerAnimation;
-	std::unordered_map<int, int> Mapper;
-	user::SpriteLayer Layer;
-	bool bUsesTransformAngleForSpriteRotation;
-	bool bUsesStateForTransform;
-	float SpriteAngle;
+	std::pair<int, int> m_OffsetFromOrigin;
+	SDL_Texture* m_Spritesheet;
+	std::pair<int, int> m_SpritesheetDimensions;
+	SDL_Rect m_FrameOnSpritesheet;
+	SDL_Rect m_FrameInGame;	
+	uint64_t m_Time_Current;
+	uint64_t m_Time_StartOfCurrentFrame;
+	float m_SingleFrameLength;
+	int m_NumberOfAnimations;
+	uint8_t m_CurrentAnimationIndex;
+	uint8_t m_CurrentFrameIndex;
+	std::vector <uint8_t> m_FramesPerAnimation;
+	std::unordered_map<int, int> m_Mapper;
+	user::SpriteLayer m_Layer;
+	bool m_bUsesTransformAngleForSpriteRotation;
+	bool m_bUsesStateForTransform;
+	float m_SpriteAngle;
 
 
 	//FRIEND CLASSES

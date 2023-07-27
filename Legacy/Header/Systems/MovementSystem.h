@@ -21,20 +21,20 @@ public:
 
 
 public:
+	float _Get_AngleBetweenPoints(float x1, float y1, float x2, float y2);
 	void _MoveAll(uint64_t deltaTime);
-	float Get_AngleBetweenPoints(float x1, float y1, float x2, float y2);
-	void Set_Angle(TransformComponent* TransformPtr, AnimatedSpriteComponent* SpritePtr, float angle);
-	void Set_Angle(TransformComponent* TransformPtr, AnimatedSpriteComponent* SpritePtr, mfk::NormalVector2D vectorangle);
+	void _Set_Angle(TransformComponent* TransformPtr, AnimatedSpriteComponent* SpritePtr, float angle);
+	void _Set_Angle(TransformComponent* TransformPtr, AnimatedSpriteComponent* SpritePtr, mfk::NormalVector2D vectorangle);
 
 
 private:
-	user::Direction Get_DirectionFromMovementVector(uint64_t movementcomponentid);
-	void ApplyMovement(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, uint64_t deltaTime);
-	void Update_MovementParameters(MovementComponent* MovementPtr, user::SubState substate);
+	user::Direction _Get_DirectionFromMovementVector(uint64_t movementcomponentid);
+	void _ApplyMovement(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, uint64_t deltaTime);
+	void _Update_MovementParameters(MovementComponent* MovementPtr, user::SubState substate);
 	
 	
 private:
-	EntitiesManager* Manager_Entities;
-	ComponentsManager* Manager_Components;
-	StateSystem* System_State;
+	EntitiesManager* m_Manager_Entities;
+	ComponentsManager* m_Manager_Components;
+	StateSystem* m_System_State;
 };

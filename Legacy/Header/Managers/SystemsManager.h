@@ -19,16 +19,16 @@ public:
 
 
 protected:
-	EntitiesManager* Manager_Entities;
-	ComponentsManager* Manager_Components;
+	EntitiesManager* m_Manager_Entities;
+	ComponentsManager* m_Manager_Components;
 
 public:
-	ActionSystem* System_Action;
-	AnimationSystem* System_Animation;
-	CollisionSystem* System_Collision;
-	MovementSystem* System_Movement;
-	StateSystem* System_State;
-	RenderSystem* System_Render;
+	ActionSystem* m_System_Action;
+	AnimationSystem* m_System_Animation;
+	CollisionSystem* m_System_Collision;
+	MovementSystem* m_System_Movement;
+	StateSystem* m_System_State;
+	RenderSystem* m_System_Render;
 	// USER DEFINED
 	// USER DEFINED
 	// USER DEFINED

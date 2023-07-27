@@ -11,15 +11,15 @@ LegacySystemsManager::~LegacySystemsManager() {}
 // USER-DEFINED
 LegacySystemsManager::LegacySystemsManager(EntitiesManager* entitiesmanager, ComponentsManager* componentsmanager)
 {
-	Manager_Entities = entitiesmanager;
-	Manager_Components = componentsmanager;
+	m_Manager_Entities = entitiesmanager;
+	m_Manager_Components = componentsmanager;
 
-	System_Action = new ActionSystem(Manager_Components, Manager_Entities, System_Movement, System_State);
-	System_Animation = new AnimationSystem(Manager_Components, Manager_Entities);
-	System_Collision = new CollisionSystem(Manager_Components, Manager_Entities);
-	System_Movement = new MovementSystem(Manager_Components, Manager_Entities, System_State);
-	System_State = new StateSystem(Manager_Components, Manager_Entities);
-	System_Render = new RenderSystem(Manager_Components, Manager_Entities);
+	m_System_Action = new ActionSystem(m_Manager_Components, m_Manager_Entities, m_System_Movement, m_System_State);
+	m_System_Animation = new AnimationSystem(m_Manager_Components, m_Manager_Entities);
+	m_System_Collision = new CollisionSystem(m_Manager_Components, m_Manager_Entities);
+	m_System_Movement = new MovementSystem(m_Manager_Components, m_Manager_Entities, m_System_State);
+	m_System_State = new StateSystem(m_Manager_Components, m_Manager_Entities);
+	m_System_Render = new RenderSystem(m_Manager_Components, m_Manager_Entities);
 	// USER DEFINED
 	// USER DEFINED
 	// USER DEFINED

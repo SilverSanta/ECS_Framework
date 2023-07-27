@@ -17,8 +17,8 @@ public:
 	// FUNCTIONS
 	uint64_t _CreateEntity();
 	std::unordered_map<user::ComponentType, uint64_t> _DeleteEntity(uint64_t entityid);
-	void PrintData_EntityContainer();
-	Entity* Get_EntityById(uint64_t entityid);
+	void _PrintData_EntityContainer();
+	Entity* _Get_EntityById(uint64_t entityid);
 
 
 	// DATA

@@ -22,7 +22,7 @@ public:
 	
 	
 	// GETTERS
-	uint64_t Get_OwnerId()
+	uint64_t _Get_OwnerId()
 	{
 		return m_OwnerId;
 	}

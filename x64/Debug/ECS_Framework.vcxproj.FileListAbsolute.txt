@@ -1,1 +1,5 @@
 D:\ECS_Framework\ECS_Framework\x64\Debug\ECS_Framework.exe
+C:\Users\aruil\OneDrive\Desktop\PoprawkiPoKomentachBartka\x64\Debug\ECS_Framework.exe
+C:\Users\aruil\OneDrive\Desktop\POPRAWKI - BKUP\x64\Debug\ECS_Framework.exe
+C:\Users\aruil\OneDrive\Desktop\ECS_Framework_Cleaned\x64\Debug\ECS_Framework.exe
+C:\Users\aruil\OneDrive\Documents\GitHub\ECS_Framework\ECS_Framework\x64\Debug\ECS_Framework.exe

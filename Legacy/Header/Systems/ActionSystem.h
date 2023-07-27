@@ -18,17 +18,17 @@ public:
 	~ActionSystem();
 
 
-	void Action_StopMoving(MovementComponent* MovementPtr, StateComponent* StatePtr);
-	void Action_WalkTo(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, float targetx, float targety);
-	void Action_Walk(MovementComponent* MovementPtr, StateComponent* StatePtr);
-	void Action_Attack(uint64_t AttackerID, uint64_t DefenderID);
-	void Action_DropDead(uint64_t DyingAgentID);
-	void Action_UsePotion(uint64_t UnitID);
+	void _Action_StopMoving(MovementComponent* MovementPtr, StateComponent* StatePtr);
+	void _Action_WalkTo(MovementComponent* MovementPtr, TransformComponent* TransformPtr, StateComponent* StatePtr, float targetx, float targety);
+	void _Action_Walk(MovementComponent* MovementPtr, StateComponent* StatePtr);
+	void _Action_Attack(uint64_t AttackerID, uint64_t DefenderID);
+	void _Action_DropDead(uint64_t DyingAgentID);
+	void _Action_UsePotion(uint64_t UnitID);
 	
 
 private:
-	EntitiesManager* Manager_Entities;
-	ComponentsManager* Manager_Components;
-	MovementSystem* System_Movement;
-	StateSystem* System_State;
+	EntitiesManager* m_Manager_Entities;
+	ComponentsManager* m_Manager_Components;
+	MovementSystem* m_System_Movement;
+	StateSystem* m_System_State;
 };

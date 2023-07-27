@@ -50,10 +50,8 @@ namespace user
 		STATE,
 		STATS,
 		TEST,
+		TEXT,
 		TRANSFORM,
-
-
-
 
 		_NONE,
 	};
@@ -121,6 +119,45 @@ namespace user
 		// USER-DEFINED
 		// USER-DEFINED
 	};	
+
+	enum class Layer
+	{
+		BACKGROUND_FAR,
+		BACKGROUND_CLOSE,
+		TILE_GROUND_FAR,
+		TILE_GROUND_CLOSE,
+		TILE_GROUND_TRAP,
+		LEVEL_GROUND,
+		LEVEL_ABOVE_GROUND,
+		PLACEMENT_OBJECT,
+		PLACEMENT_NODE_AVAILABILITY,
+		PROJECTILE,
+		VISUAL_EFFECTS,
+		TEXT,
+		UI_BACKGROUND,
+		UI_OBJECTS,
+		UI_TEXT,
+		MOUSE,
+
+
+		_COUNT,
+	};
+	enum class Alignment
+	{
+		TOP_LEFT,
+		TOP_CENTRE,
+		TOP_RIGHT,
+
+		MIDDLE_LEFT,
+		MIDDLE_CENTRE,
+		MIDDLE_RIGHT,
+
+		BOT_LEFT,
+		BOT_CENTRE,
+		BOT_RIGHT
+	};
+
+
 }
 
 

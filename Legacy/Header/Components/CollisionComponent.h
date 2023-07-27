@@ -11,7 +11,7 @@ class ComponentsManager;
 // SHAPE ENUM
 enum class Shape
 {
-	CollisionBox,
+	m_CollisionBox,
 	Sphere,
 };
 
@@ -20,15 +20,15 @@ struct Sphere {
 
 	Sphere()
 	{
-		X = 0;
-		Y = 0;
+		m_X = 0;
+		m_Y = 0;
 		R = 1;
 		Chords = 8;
 	}
 	Sphere(int x, int y, int r)
 	{
-		X = x;
-		Y = y;
+		m_X = x;
+		m_Y = y;
 		R = r;
 		UpdateChords(R);
 	}
@@ -39,8 +39,8 @@ struct Sphere {
 	}
 	void UpdatePointCoordinates() {
 
-		int xc = (int)(X + R);
-		int yc = (int)(Y + R);
+		int xc = (int)(m_X + R);
+		int yc = (int)(m_Y + R);
 
 
 		if (ExternalPoints.size() > 0) {
@@ -88,8 +88,8 @@ struct Sphere {
 		RecreatePoints();
 	}
 
-	int X;
-	int Y;
+	int m_X;
+	int m_Y;
 	int R;
 	int Chords;
 	std::vector<std::pair<int, int>> ExternalPoints;
@@ -119,7 +119,7 @@ public:
 			
 
 			//Update sphere???
-			CollisionSphere.Update();
+			m_CollisionSphere.Update();
 		}	
 	}
 	virtual void _Render(SDL_Renderer* renderer) override
@@ -131,17 +131,17 @@ public:
 			SDL_GetRenderDrawColor(renderer, &backgroundcolour.red, &backgroundcolour.green, &backgroundcolour.blue, &backgroundcolour.alfa);
 
 			//Changing draw colour
-			mfk::ColourTable colourtable = mfk::Colour::Get_ColourTable(ShapeColour);
+			mfk::ColourTable colourtable = mfk::Colour::Get_ColourTable(m_ShapeColour);
 			SDL_SetRenderDrawColor(renderer, colourtable.red, colourtable.green, colourtable.blue, colourtable.alfa);
 
 
-			if (CollisionShape == Shape::CollisionBox)
+			if (m_CollisionShape == Shape::m_CollisionBox)
 			{
-				SDL_RenderDrawRect(renderer, &CollisionBox);
+				SDL_RenderDrawRect(renderer, &m_CollisionBox);
 			}
 			else
 			{
-				CollisionSphere.DrawSphere(renderer);
+				m_CollisionSphere.DrawSphere(renderer);
 			}
 
 			//returning to background colour
@@ -150,7 +150,7 @@ public:
 	}
 	virtual void _DeleteFromRepository() override
 	{
-		mfk::FindObjectInRepoAndKillIt(this, CollisionRepository);
+		mfk::FindObjectInRepoAndKillIt(this, m_CollisionRepository);
 	}
 public:
 	virtual void _Init(std::vector<CollisionComponent> &repo, Shape shape, mfk::ColourList colour, user::CollisionProfile profile, int boxwidth, int boxheight, int sphereradius, int offsetx, int offsety)
@@ -159,33 +159,33 @@ public:
 		if (this != nullptr)
 		{
 			// (1) REPOSITORY
-			CollisionRepository = &repo;
+			m_CollisionRepository = &repo;
 
 			// (2) COLLISION
-			bShowShape = true;
-			ShapeColour = colour;
-			CollisionShape = shape;
-			Profile = profile;
-			CollisionBox.w = boxwidth;
-			CollisionBox.h = boxheight;
-			CollisionSphere.R = sphereradius;
-			CollisionSphere.UpdateChords(CollisionSphere.R);
-			OffsetFromOrigin = std::make_pair(offsetx, offsety);
+			m_bShowShape = true;
+			m_ShapeColour = colour;
+			m_CollisionShape = shape;
+			m_Profile = profile;
+			m_CollisionBox.w = boxwidth;
+			m_CollisionBox.h = boxheight;
+			m_CollisionSphere.R = sphereradius;
+			m_CollisionSphere.UpdateChords(m_CollisionSphere.R);
+			m_OffsetFromOrigin = std::make_pair(offsetx, offsety);
 		}		
 	}
 
 
 protected:
 	// REPOSITORY
-	std::vector<CollisionComponent>* CollisionRepository;
+	std::vector<CollisionComponent>* m_CollisionRepository;
 	// DATA
-	std::pair<int, int> OffsetFromOrigin;
-	Shape CollisionShape;
-	SDL_Rect CollisionBox;
-	Sphere CollisionSphere;
-	bool bShowShape;
-	mfk::ColourList ShapeColour;
-	user::CollisionProfile Profile;
+	std::pair<int, int> m_OffsetFromOrigin;
+	Shape m_CollisionShape;
+	SDL_Rect m_CollisionBox;
+	Sphere m_CollisionSphere;
+	bool m_bShowShape;
+	mfk::ColourList m_ShapeColour;
+	user::CollisionProfile m_Profile;
 
 
 	//FRIEND CLASSES

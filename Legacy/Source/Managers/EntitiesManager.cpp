@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Entity.h"
 #include "EntitiesManager.h"
+#include <memory>
 
 
 // CONSTRUCTOR
@@ -20,8 +21,11 @@ uint64_t EntitiesManager::_CreateEntity()
 	if (m_Entities.size() < m_MaxEntities)
 	{
 		m_IdCounter++;
+		
 		Entity* NewEntity = new Entity(m_IdCounter, this);
 		m_Entities.emplace_back(*NewEntity);
+
+		delete NewEntity;
 
 		return m_IdCounter;
 	}
@@ -34,16 +38,16 @@ uint64_t EntitiesManager::_CreateEntity()
 std::unordered_map<user::ComponentType, uint64_t> EntitiesManager::_DeleteEntity(uint64_t entityid)
 {
 	// (1) Create a vector of pointers to all components from the entity
-	Entity* entity = Get_EntityById(entityid);
+	Entity* entity = _Get_EntityById(entityid);
 
-	std::unordered_map<user::ComponentType, uint64_t> ComponentsToBeDeletedByID = entity->RemoveComponentIDsFromEntity();
+	std::unordered_map<user::ComponentType, uint64_t> ComponentsToBeDeletedByID = entity->_RemoveComponentIDsFromEntity();
 	
 	// (2) Remove the entity from the vector (kill it)
 	bool bFound = false;
 	int i = 0;
 	while (bFound == false && i < m_Entities.size())
 	{
-		if ((int)entity->Get_EntityId() == (int)m_Entities.at(i).Get_EntityId())
+		if ((int)entity->_Get_EntityId() == (int)m_Entities.at(i)._Get_EntityId())
 		{
 			m_Entities.erase(m_Entities.begin() + i);
 			bFound = true;
@@ -54,9 +58,10 @@ std::unordered_map<user::ComponentType, uint64_t> EntitiesManager::_DeleteEntity
 			i++;
 		}
 	}
+
 	return ComponentsToBeDeletedByID;
 }
-void EntitiesManager::PrintData_EntityContainer()
+void EntitiesManager::_PrintData_EntityContainer()
 {
 	std::cout << "ENTITIES amount: " << m_Entities.size() << ".\n";
 	for (const auto& object : m_Entities)
@@ -64,11 +69,11 @@ void EntitiesManager::PrintData_EntityContainer()
 		std::cout << "ENTITY ID: #" << object.m_Id << ".\n";
 	}
 }
-Entity* EntitiesManager::Get_EntityById(uint64_t entityid)
+Entity* EntitiesManager::_Get_EntityById(uint64_t entityid)
 {
 	Entity* entity;
 
-	std::vector<Entity>::iterator itr = std::find_if(m_Entities.begin(), m_Entities.end(), [&](Entity& val) {return val.Get_EntityId() == entityid; });
+	std::vector<Entity>::iterator itr = std::find_if(m_Entities.begin(), m_Entities.end(), [&](Entity& val) {return val._Get_EntityId() == entityid; });
 
 	entity = &(*itr);
 

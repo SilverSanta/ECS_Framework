@@ -7,11 +7,11 @@
 ResourceManager::ResourceManager(){}
 ResourceManager::ResourceManager(ResourceManager const&){}
 
-ResourceManager& ResourceManager::Get_Instance(){
+ResourceManager& ResourceManager::_Get_Instance(){
 	static ResourceManager* s_instance = new ResourceManager;
 	return *s_instance;
 }
-SDL_Surface* ResourceManager::Get_Surface(std::string filepath){
+SDL_Surface* ResourceManager::_Get_Surface(std::string filepath){
 	SDL_Surface* Surface;
 
 	//(1)check if the filepath is already in the map
@@ -34,10 +34,33 @@ SDL_Surface* ResourceManager::Get_Surface(std::string filepath){
 
 	return Surface;
 }
-int ResourceManager::Get_MapSize()
+int ResourceManager::_Get_MapSize()
 {
 	int Size = (int)m_surfaces.size();
 	return Size;
 }
+TTF_Font* ResourceManager::_Get_Font(const char* fontpath, int textheight)
+{
+	TTF_Font* Font;
+	std::string storedfontpath = fontpath + '_' + std::to_string(textheight);
+	if (TTF_Init() < 0)
+	{
+		std::cout << " \n======= FAILED TO Init TFF =======\n\n";
+	}
 
+	bool bFontPathPresent = (m_fonts.find(storedfontpath) == m_fonts.end()) ? (false) : (true);
+	if (bFontPathPresent == true)
+	{
+		//std::cout << "Fontpath already in the map, font is not loaded again.\n";
+		Font = m_fonts.at(storedfontpath);
+	}
+	else
+	{
+		//std::cout << "Fontpath added:" << fontpath << " with text height: " << textheight << "\n";
+		Font = TTF_OpenFont(fontpath, textheight);
+		m_fonts.insert(std::make_pair(storedfontpath, Font));
+	}
+
+	return Font;
+}
 
